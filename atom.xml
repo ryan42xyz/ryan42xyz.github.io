@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Rui Shao&apos;s Blog</title>
+  <link href="https://ryan42xyz.github.io/atom.xml" rel="self"/>
+  <link href="https://ryan42xyz.github.io/"/>
+  <updated>2026-02-11T08:53:54.380Z</updated>
+  <id>https://ryan42xyz.github.io/</id>
+  <author><name>Rui Shao</name></author>
+  <entry>
+    <title>AI时代，写作不再是表达，而是建模</title>
+    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling/"/>
+    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling/</id>
+    <updated>2026-02-11T08:53:54.380Z</updated>
+    <published>2026-02-11T08:22:42.000Z</published>
+    <content type="html"><![CDATA[<h1 id="AI时代，写作不再是表达，而是建模"><a href="#AI时代，写作不再是表达，而是建模" class="headerlink" title="AI时代，写作不再是表达，而是建模"></a>AI时代，写作不再是表达，而是建模</h1><h2 id="问题：AI-能写博客，为什么还要自己写？"><a href="#问题：AI-能写博客，为什么还要自己写？" class="headerlink" title="问题：AI 能写博客，为什么还要自己写？"></a>问题：AI 能写博客，为什么还要自己写？</h2><p>AI 能写得很好。给它一个主题，它能生成结构清晰、逻辑顺畅、甚至文采不错的文章。那为什么还要自己写？</p>
+<p>答案取决于你的目标函数。</p>]]></content>
+  </entry>
+</feed>
