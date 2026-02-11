@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>拒绝死亡的生产系统 | Rui Shao&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="拒绝死亡的生产系统生产系统首先是生存系统从第一性上，我们一直说生产环境生产环境，本质是什么？ Demo 系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统的目标是运行。生产系统的目标是存活。 当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。 生产系统的第一目标不是服务用户。而是避免自我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拒绝死亡的生产系统">
+<meta property="og:url" content="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/index.html">
+<meta property="og:site_name" content="Rui Shao&#39;s Blog">
+<meta property="og:description" content="拒绝死亡的生产系统生产系统首先是生存系统从第一性上，我们一直说生产环境生产环境，本质是什么？ Demo 系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统的目标是运行。生产系统的目标是存活。 当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。 生产系统的第一目标不是服务用户。而是避免自我">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-11T10:47:32.000Z">
+<meta property="article:modified_time" content="2026-02-11T10:58:11.628Z">
+<meta property="article:author" content="Rui Shao">
+<meta property="article:tag" content="SRE">
+<meta property="article:tag" content="分布式系统">
+<meta property="article:tag" content="可靠性">
+<meta property="article:tag" content="多集群">
+<meta property="article:tag" content="架构">
+<meta property="article:tag" content="生产系统">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Rui Shao's Blog" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.svg">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Rui Shao&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Technical blog</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://ryan42xyz.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2026-02-11_production-systems-refuse-to-die_zh" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/" class="article-date">
+  <time class="dt-published" datetime="2026-02-11T10:47:32.000Z" itemprop="datePublished">2026-02-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a>►<a class="article-category-link" href="/categories/%E6%9E%B6%E6%9E%84/%E7%94%9F%E4%BA%A7%E5%B7%A5%E7%A8%8B/">生产工程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      拒绝死亡的生产系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="拒绝死亡的生产系统"><a href="#拒绝死亡的生产系统" class="headerlink" title="拒绝死亡的生产系统"></a>拒绝死亡的生产系统</h1><h2 id="生产系统首先是生存系统"><a href="#生产系统首先是生存系统" class="headerlink" title="生产系统首先是生存系统"></a>生产系统首先是生存系统</h2><p>从第一性上，我们一直说生产环境生产环境，本质是什么？</p>
+<p>Demo 系统优化成功。生产系统优化生存。</p>
+<p>这是完全不同的物种。</p>
+<p>玩具系统的目标是<strong>运行</strong>。生产系统的目标是<strong>存活</strong>。</p>
+<p>当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。</p>
+<p>生产系统的第一目标不是服务用户。而是避免自我毁灭。</p>
+<p>这不是哲学空谈。这是当你凌晨3点被叫醒，因为一次部署让整个公司宕机时的感受。当区域故障意味着你的业务停止存在时。当你意识到一个配置错误可以摧毁你构建的一切时。</p>
+<p>这些是生产伤疤。它们驱动架构选择。</p>
+<p>当系统失败时，你需要知道：</p>
+<ul>
+<li>发生了什么？</li>
+<li>影响范围是什么？</li>
+<li>如何恢复？</li>
+<li>是否在恶化？</li>
+</ul>
+<p>如果你无法回答这些问题，那就不是生产系统。</p>
+<p>从第一性原理，生产系统有三个核心能力：</p>
+<ol>
+<li><strong>可观测</strong>（Observable）——你可以看到发生了什么</li>
+<li><strong>可控制</strong>（Controllable）——你可以控制系统</li>
+<li><strong>可恢复</strong>（Recoverable）——你可以从失败中恢复</li>
+</ol>
+<p>还有两个：<br>4. <strong>可隔离</strong>（Isolatable）——问题被局部化，不会扩散<br>5. <strong>可演练</strong>（Exercisable）——你可以练习故障场景</p>
+<p>生产系统是能够安全失败的系统。它不会扩散。它不会失控。它可以恢复。它可以被解释。</p>
+<p>这适用于成熟或关键任务的生产环境——数据丢失、长期停机或不受控制的爆炸半径是存在性威胁的系统。不适用于早期增长阶段的系统，那里停机在战略上是可容忍的。不适用于”系统生存”和”业务生存”解耦的系统。</p>
+<p>当生存阈值被跨越时，架构会收敛到那些限制爆炸半径、保持可恢复性、并在故障下仍可由人类操作的形态。</p>
+<p>多集群、主被动真相模型和隔离&#x2F;单元结构是对该约束的反复出现的结构响应。</p>
+<hr>
+<h2 id="单集群的故障域"><a href="#单集群的故障域" class="headerlink" title="单集群的故障域"></a>单集群的故障域</h2><p>单集群为效率而存在。多集群为生存而存在。</p>
+<p>当数据跨机器时，一切都变得复杂。复制。分区。事务。但这不是多集群出现的原因。</p>
+<p>不是因为 QPS 上升。甚至不是因为数据太大。</p>
+<p>而是因为：<strong>单个故障域不再可接受</strong>。</p>
+<p>故障域 &#x3D; 单个错误可以摧毁的最大范围。</p>
+<p>使用单集群：</p>
+<ul>
+<li>故障域 &#x3D; 整个公司</li>
+</ul>
+<p>一次区域故障。一次云控制平面故障。一次网络隔离。一次 DNS&#x2F;路由错误。一次人为错误。</p>
+<p>全部系统一起死。Everything dies together.</p>
+<p>这直接决定了单集群在生产环境中是不够的。不是因为它无法扩展。不是因为它无法执行。因为故障域不可接受。</p>
+<p>当生存阈值被跨越时——当长期故障变得不可接受时——单集群成为一个陷阱。</p>
+<p>组织表面积成倍增加风险：团队数量 × 部署频率 × 配置复杂度 × 爆炸半径。随着这个增加，风险非线性增长。</p>
+<p>收敛触发条件：</p>
+<ul>
+<li>部署频率上升</li>
+<li>组织表面积扩大</li>
+<li>爆炸半径变得存在性</li>
+<li>状态复杂度超过安全的单域操作</li>
+</ul>
+<p>当这些汇聚时，单集群不再可生存。</p>
+<hr>
+<h2 id="为什么生存系统收敛到多集群"><a href="#为什么生存系统收敛到多集群" class="headerlink" title="为什么生存系统收敛到多集群"></a>为什么生存系统收敛到多集群</h2><p>多集群为生存而存在，不为效率。</p>
+<p>从第一性原理，它不是为扩展。它是为了将故障和爆炸半径保持在可接受的范围内。</p>
+<p>这是一个收敛模式，不是确定性演化。当操作风险超过阈值时，系统会收敛到多集群。路径和时间各不相同，但模式是一致的。</p>
+<p>三个触发条件驱动收敛：</p>
+<p><strong>1. 区域故障变得不可接受</strong></p>
+<p>当单个区域不再是可靠的锚点时——当区域故障会摧毁业务时——HA 多集群变得必要。</p>
+<p><strong>2. 数据分区变得必要</strong></p>
+<p>当写入压力迫使数据库分片、缓存分区、队列分区时——当数据被分区时，计算必须跟随。数据已经是多集群的；计算还没有跟上。</p>
+<p><strong>3. 组织规模超过安全操作</strong></p>
+<p>当内部团队倍增，部署变得更频繁，配置激增，爆炸半径扩大时——当组织表面积超过阈值时——单集群变得不安全操作。</p>
+<p>这是最被忽视的触发条件。它不是关于技术规模。它是关于操作风险。</p>
+<p>从 DDIA 的可靠性定义：系统在错误发生时仍然正确工作。不是避免错误，而是与它们共存。</p>
+<p>对于生产环境，我们需要与失败共存，而不是避免它。这是根本不同的思考。</p>
+<p>多集群的真正原因不是性能。而是<strong>人类无法安全操作</strong>组织规模的单集群。</p>
+<p>你开始感受到：不敢 deploy。不敢改。You don’t dare deploy. You don’t dare change.</p>
+<p>当这种情况发生时，多集群成为必需品——不是为了扩展，而是为了组织可扩展性。</p>
+<p>生存压力是占主导地位的长期选择力量。即使短期驱动因素不同（供应商锁定、合规性、惯性），在高可靠性环境中持续存在的架构模式往往是那些保持可操作性和有界故障的模式。</p>
+<hr>
+<h2 id="HA、扩展、隔离：三种故障模式的三种响应"><a href="#HA、扩展、隔离：三种故障模式的三种响应" class="headerlink" title="HA、扩展、隔离：三种故障模式的三种响应"></a>HA、扩展、隔离：三种故障模式的三种响应</h2><p>不同的目标产生不同的架构。不同的故障模式需要不同的响应。</p>
+<p>你构建多集群：</p>
+<ul>
+<li>为了生存？（外部故障仍然可用）</li>
+<li>为了扩展？（可用范围扩大）</li>
+<li>为了避免互相杀死？（内部隔离）</li>
+</ul>
+<p>不同的目标，不同的方法。</p>
+<h3 id="HA-多集群：从外部生存"><a href="#HA-多集群：从外部生存" class="headerlink" title="HA 多集群：从外部生存"></a>HA 多集群：从外部生存</h3><p><strong>故障模式：</strong> 外部故障（区域故障、云提供商故障）</p>
+<p><strong>架构：</strong> 基于复制（DDIA “replication”）</p>
+<p><strong>第一性原理：</strong> 不是扩展，不是延迟。当整个集群或区域死亡时，系统仍然存在。</p>
+<p>区域死亡不能带走公司。</p>
+<p><strong>要求：</strong></p>
+<ul>
+<li>故障转移必须可预测</li>
+<li>故障转移必须可演练（你可以练习它）</li>
+<li>故障转移必须可回滚</li>
+</ul>
+<p>否则多集群 &#x3D; 更大的灾难。</p>
+<p><strong>权衡：</strong> 为可靠性牺牲效率。</p>
+<p>备用成本。数据复制成本。架构复杂度。操作复杂度。</p>
+<p>但这是唯一真正提高外部故障生存能力的多集群类型。</p>
+<h3 id="扩展多集群：增长期间的生存"><a href="#扩展多集群：增长期间的生存" class="headerlink" title="扩展多集群：增长期间的生存"></a>扩展多集群：增长期间的生存</h3><p><strong>故障模式：</strong> 扩展故障（流量&#x2F;数据超过容量）</p>
+<p><strong>架构：</strong> 基于分区（DDIA “partition”）</p>
+<p><strong>第一性原理：</strong> 这是性能问题，不是生存问题。</p>
+<p>典型形式：地理分布式集群（美国集群、欧盟集群、亚洲集群）。每个服务本地用户。</p>
+<p>关键设计：</p>
+<ul>
+<li>流量本地路由</li>
+<li>数据本地化</li>
+<li>跨区域同步有限</li>
+</ul>
+<p><strong>数据分区驱动多集群：</strong></p>
+<p>当数据库必须分片时：</p>
+<ul>
+<li>集群 A → 分片 1</li>
+<li>集群 B → 分片 2</li>
+<li>集群 C → 分片 3</li>
+</ul>
+<p>计算最终跟随数据。</p>
+<p>此时：多集群 &#x3D; 数据拓扑的映射。</p>
+<h3 id="隔离多集群：从自身生存"><a href="#隔离多集群：从自身生存" class="headerlink" title="隔离多集群：从自身生存"></a>隔离多集群：从自身生存</h3><p><strong>故障模式：</strong> 内部故障（部署错误、配置错误、客户过载、噪声邻居）</p>
+<p><strong>架构：</strong> 基于单元</p>
+<p><strong>第一性原理：</strong> 将系统拆分为多个独立的故障域。</p>
+<p>每个集群是一个单元。</p>
+<p>典型形式：</p>
+<ul>
+<li><strong>单元架构：</strong> Amazon&#x2F;Stripe&#x2F;Uber 模式<ul>
+<li>单元 1 → 用户 0-100万</li>
+<li>单元 2 → 用户 100万-200万</li>
+<li>单元 3 → 用户 200万-300万</li>
+</ul>
+</li>
+<li><strong>每租户集群：</strong> B2B SaaS 模式<ul>
+<li>企业 A → 集群 A</li>
+<li>企业 B → 集群 B</li>
+<li>企业 C → 集群 C</li>
+</ul>
+</li>
+</ul>
+<p>每个单元：</p>
+<ul>
+<li>独立计算</li>
+<li>独立数据库</li>
+<li>独立缓存</li>
+<li>独立队列</li>
+</ul>
+<p>一个单元死亡：只影响部分用户，不是整个公司。</p>
+<p><strong>第一性原理目标：</strong> 控制爆炸半径。</p>
+<p>不是基础设施故障。而是：</p>
+<ul>
+<li>部署故障</li>
+<li>配置错误</li>
+<li>客户过载</li>
+<li>噪声邻居</li>
+</ul>
+<p>这是现代生产系统的最大风险。</p>
+<p><strong>权衡：</strong></p>
+<ul>
+<li>基础设施成本上升</li>
+<li>编排复杂度增加</li>
+<li>工具必须成熟</li>
+</ul>
+<p>但好处是巨大的：<strong>系统可以持续演进而不自我毁灭</strong>。</p>
+<p>HA 让它从外部存活。扩展让它在增长期间存活。隔离让它从自身存活。</p>
+<hr>
+<h2 id="为什么主动-主动模式退却：状态模糊性问题"><a href="#为什么主动-主动模式退却：状态模糊性问题" class="headerlink" title="为什么主动-主动模式退却：状态模糊性问题"></a>为什么主动-主动模式退却：状态模糊性问题</h2><p>为什么几乎所有的生产主动-主动多集群系统最终都会退却到主动-被动 + 隔离？</p>
+<p>这是行业收敛模式。不是理论。十多年生产经验。</p>
+<p>每个系统都梦想主动-主动。大多数最终退却到主动-被动 + 隔离。</p>
+<p>在纸面上，主动-主动是完美的：</p>
+<ul>
+<li>无需故障转移</li>
+<li>无单点故障</li>
+<li>全球低延迟</li>
+<li>高可用性</li>
+</ul>
+<p>但现实：</p>
+<p><strong>主动-主动的最大问题不是构建它。而是人类无法操作和理解它。</strong></p>
+<p>分布式系统中最难的问题已经转变：</p>
+<ul>
+<li>从：网络故障</li>
+<li>到：状态模糊性</li>
+</ul>
+<p>核心问题不是系统是否会宕机。</p>
+<p>而是：<strong>当它没有宕机但状态不同步时，没有人知道真实状态</strong>。</p>
+<h3 id="状态模糊性作为认知负载"><a href="#状态模糊性作为认知负载" class="headerlink" title="状态模糊性作为认知负载"></a>状态模糊性作为认知负载</h3><p>主动-主动的基本成本：<strong>不再存在单一真相来源</strong>。</p>
+<p>你会遇到：</p>
+<ul>
+<li>双写冲突</li>
+<li>时钟偏差</li>
+<li>复制延迟</li>
+<li>部分写成功</li>
+<li>缓存不一致</li>
+</ul>
+<p>所以你必须引入：</p>
+<ul>
+<li>法定人数</li>
+<li>向量时钟</li>
+<li>CRDT</li>
+<li>冲突解决</li>
+</ul>
+<p>复杂度指数级爆炸。</p>
+<p>但更糟的是：调试变得不可能。</p>
+<p>单集群：</p>
+<ul>
+<li>问题 → 检查日志 → 找到根本原因</li>
+</ul>
+<p>主动-主动：</p>
+<ul>
+<li><strong>哪个集群是正确的？</strong></li>
+</ul>
+<p>可能的场景：</p>
+<ul>
+<li>集群 A 看起来正常</li>
+<li>集群 B 看起来正常</li>
+<li>但用户看到错误</li>
+</ul>
+<p>因为：<strong>系统行为是多个真相状态的叠加</strong>。</p>
+<p>调试从确定性转变为概率性。</p>
+<p>许多团队经历他们的第一次多区域主动-主动故障并意识到：<strong>我们无法理解这个系统</strong>。</p>
+<h3 id="可操作性谱"><a href="#可操作性谱" class="headerlink" title="可操作性谱"></a>可操作性谱</h3><p>人类可操作性存在于一个谱上：</p>
+<ul>
+<li><strong>确定性可操作性：</strong> 单一真相来源，清晰的因果关系，可预测的行为</li>
+<li><strong>概率性可操作性：</strong> 多个可能状态，不清楚的因果关系，需要统计推理</li>
+<li><strong>不可操作：</strong> 状态模糊性超过人类推理能力，无法确定真相或恢复路径</li>
+</ul>
+<p>主动-主动下降到概率性&#x2F;不可操作。</p>
+<p>在事件期间，你需要有界时间可操作性：操作员必须在事件响应窗口内（分钟&#x2F;小时，不是天）确定真相和恢复路径。</p>
+<p>主动-主动使这变得不可能。</p>
+<p>通过事件响应镜头：</p>
+<ul>
+<li><strong>你能观察到真实状态吗？</strong> 不能——哪个状态是真实的？</li>
+<li><strong>你能控制系统吗？</strong> 不能——你应该控制哪个集群？</li>
+<li><strong>你能恢复吗？</strong> 不能——你应该恢复到哪个状态？</li>
+<li><strong>你能防止扩散吗？</strong> 不能——故障已经是模糊的</li>
+</ul>
+<p>这适用于由正常工程组织操作的应用程序&#x2F;数据多写入系统。不适用于基础设施层主动-主动（CDN、DNS），它们可以在不同约束下成功。</p>
+<p>短期可靠性可以通过冗余&#x2F;自动化存在。但长期生产生存能力需要人类可操作性——某种人类可恢复的真相和干预路径。</p>
+<hr>
+<h2 id="主动-被动-隔离：恢复人类可操作性"><a href="#主动-被动-隔离：恢复人类可操作性" class="headerlink" title="主动-被动 + 隔离：恢复人类可操作性"></a>主动-被动 + 隔离：恢复人类可操作性</h2><p>退却的核心原因：<strong>必须恢复可理解性</strong>。</p>
+<p>主动-被动重新引入：<strong>单一真相来源</strong>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主集群 → 真相</span><br><span class="line">备用 → 备份</span><br></pre></td></tr></table></figure>
+
+<p>这带来三个巨大好处：</p>
+<p><strong>1. 状态清晰</strong></p>
+<p>只有一个真相。</p>
+<p><strong>2. 调试是可解的</strong></p>
+<p>问题必须来自主集群。</p>
+<p><strong>3. 回滚是可行的</strong></p>
+<p>只需回滚主集群。</p>
+<p>这是人类可操作系统的必要条件。</p>
+<p>但主动-被动仍然有一个问题：<strong>爆炸半径仍然巨大</strong>。</p>
+<p>一次糟糕的部署仍然可以摧毁主集群。</p>
+<p>所以系统继续演进：</p>
+<p><strong>隔离多集群</strong></p>
+<p>形式：</p>
+<ul>
+<li>单元架构</li>
+<li>每租户集群</li>
+<li>工作负载集群</li>
+</ul>
+<p>核心目标：<strong>限制事故影响范围</strong>。</p>
+<p>不是区域故障。而是：<strong>人类操作故障</strong>。</p>
+<p>这是现代系统的最大风险。</p>
+<p>收敛模式：主动-被动 + 隔离。</p>
+<p>一起：</p>
+<ul>
+<li><strong>确定性可操作性</strong>（单一真相来源恢复）</li>
+<li><strong>有界故障域</strong>（隔离限制爆炸半径）</li>
+</ul>
+<p>真相模型演化：</p>
+<ul>
+<li>单集群：单一真相（简单）</li>
+<li>主动-主动：多个真相（模糊）</li>
+<li>主动-被动：单一真相恢复（可操作）</li>
+<li>隔离：多个真相，有界域（可生存）</li>
+</ul>
+<p>这条路径几乎是普遍的行业经验。</p>
+<hr>
+<h2 id="生存的架构"><a href="#生存的架构" class="headerlink" title="生存的架构"></a>生存的架构</h2><p>当系统的长期故障对组织变得不可接受时，它就不再仅仅是服务系统，而成为生存系统。</p>
+<p>此时，架构会收敛到那些限制爆炸半径、保持可恢复性、并在故障下仍可由人类操作的形态。</p>
+<p>多集群、主动-被动真相模型和隔离&#x2F;单元结构是在人类操作限制下对该约束的反复出现的结构响应。</p>
+<p>这是一个收敛模式，不是确定性演化。当操作风险超过阈值时，系统会收敛。路径和时间各不相同，但模式是一致的。</p>
+<p>人类可操作性是硬可靠性约束，不是便利性。</p>
+<p>可理解性——存在一个足以进行安全干预的可确定因果模型——不是可有可无的。它是持续的人类操作生产系统所必需的。</p>
+<p>在高可靠性环境中持续存在的架构模式往往是那些保持可操作性和有界故障的模式。生存压力是占主导地位的长期选择力量，即使短期驱动因素不同。</p>
+<p>生产系统首先是生存系统。其他一切——多集群演化、主动-主动退却、隔离出现——都从这个前提流动。</p>
+<p>生存的架构是在故障下人类可操作性的架构。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/" data-id="cuidLMOufniZj8x57HZiefStq" data-title="拒绝死亡的生产系统" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SRE/" rel="tag">SRE</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" rel="tag">分布式系统</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8F%AF%E9%9D%A0%E6%80%A7/" rel="tag">可靠性</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E9%9B%86%E7%BE%A4/" rel="tag">多集群</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E7%B3%BB%E7%BB%9F/" rel="tag">生产系统</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/02/11/2026-02-11_production-systems-refuse-to-die/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Production Systems That Refuse To Die</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/">Architecture</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Architecture/Production-Engineering/">Production Engineering</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%80%9D%E8%80%83%E6%A1%86%E6%9E%B6/">思考框架</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9E%B6%E6%9E%84/">架构</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9E%B6%E6%9E%84/%E7%94%9F%E4%BA%A7%E5%B7%A5%E7%A8%8B/">生产工程</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%94%9F%E4%BA%A7%E5%B7%A5%E7%A8%8B/">生产工程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI%E5%8D%8F%E4%BD%9C/" rel="tag">AI协作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SRE/" rel="tag">SRE</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/architecture/" rel="tag">architecture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/distributed-systems/" rel="tag">distributed-systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/multi-cluster/" rel="tag">multi-cluster</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/production-systems/" rel="tag">production-systems</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reliability/" rel="tag">reliability</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA/" rel="tag">写作方法论</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%86%B3%E7%AD%96%E6%A8%A1%E5%9E%8B/" rel="tag">决策模型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" rel="tag">分布式系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" rel="tag">可观测性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8F%AF%E9%9D%A0%E6%80%A7/" rel="tag">可靠性</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%A4%9A%E9%9B%86%E7%BE%A4/" rel="tag">多集群</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%B6%E6%9E%84/" rel="tag">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E7%B3%BB%E7%BB%9F/" rel="tag">生产系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/" rel="tag">生产运维</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" rel="tag">监控系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" rel="tag">系统设计</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%83%BD%E5%8A%9B%E5%BD%A2%E6%88%90/" rel="tag">能力形成</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AI%E5%8D%8F%E4%BD%9C/" style="font-size: 10px;">AI协作</a> <a href="/tags/SRE/" style="font-size: 20px;">SRE</a> <a href="/tags/architecture/" style="font-size: 10px;">architecture</a> <a href="/tags/distributed-systems/" style="font-size: 10px;">distributed-systems</a> <a href="/tags/multi-cluster/" style="font-size: 10px;">multi-cluster</a> <a href="/tags/production-systems/" style="font-size: 10px;">production-systems</a> <a href="/tags/reliability/" style="font-size: 10px;">reliability</a> <a href="/tags/%E5%86%99%E4%BD%9C%E6%96%B9%E6%B3%95%E8%AE%BA/" style="font-size: 10px;">写作方法论</a> <a href="/tags/%E5%86%B3%E7%AD%96%E6%A8%A1%E5%9E%8B/" style="font-size: 10px;">决策模型</a> <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">分布式系统</a> <a href="/tags/%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7/" style="font-size: 10px;">可观测性</a> <a href="/tags/%E5%8F%AF%E9%9D%A0%E6%80%A7/" style="font-size: 10px;">可靠性</a> <a href="/tags/%E5%A4%9A%E9%9B%86%E7%BE%A4/" style="font-size: 10px;">多集群</a> <a href="/tags/%E6%9E%B6%E6%9E%84/" style="font-size: 10px;">架构</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">生产系统</a> <a href="/tags/%E7%94%9F%E4%BA%A7%E8%BF%90%E7%BB%B4/" style="font-size: 10px;">生产运维</a> <a href="/tags/%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" style="font-size: 10px;">监控系统</a> <a href="/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" style="font-size: 10px;">系统设计</a> <a href="/tags/%E8%83%BD%E5%8A%9B%E5%BD%A2%E6%88%90/" style="font-size: 10px;">能力形成</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/02/">February 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/">拒绝死亡的生产系统</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/11/2026-02-11_production-systems-refuse-to-die/">Production Systems That Refuse To Die</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/11/2026-02-11_production-monitoring/">监控系统会死在哪里：构建真正有效的生产控制系统</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/11/2026-02-11_ai-writing-modeling/">AI时代，写作不再是表达，而是建模</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 Rui Shao<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
