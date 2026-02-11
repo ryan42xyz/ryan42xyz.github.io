@@ -23,6 +23,14 @@
     <content type="html"><![CDATA[<p>生产系统首先是生存系统从第一性上，我们一直说生产环境生产环境，本质是什么？ Demo 系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统的目标是运行。生产系统的目标是存活。 当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。 生产系统的第一目标不是服务用户。而是避免自我毁灭。 这不是哲学空谈。这是当你凌晨3点被叫醒，因为一次部署让整个公司宕机时的感受。当区域故障意味着你的业务停止存在时。当你意识到一个配置错误可以摧毁你构建的一切时。…</p>]]></content>
   </entry>
   <entry>
+    <title>Where Monitoring Systems Die: Building Truly Effective Production Control Systems</title>
+    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_en/"/>
+    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_en/</id>
+    <updated>2026-02-11T11:09:38.993Z</updated>
+    <published>2026-02-11T09:01:31.000Z</published>
+    <content type="html"><![CDATA[<p>When dashboards are all green but users are already down, you’re not facing an observability problem. You’re facing a control system failure. This is not a monitoring primer. This is a design review: why production organizations lose visibility when they need it most. Part 0:…</p>]]></content>
+  </entry>
+  <entry>
     <title>监控系统会死在哪里：构建真正有效的生产控制系统</title>
     <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/"/>
     <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/</id>
