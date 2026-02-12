@@ -6,15 +6,15 @@
   
   <title>监控系统会死在哪里：构建真正有效的生产控制系统 | Rui Shao&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故场景凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。Me">
+  <meta name="description" content="当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="监控系统会死在哪里：构建真正有效的生产控制系统">
 <meta property="og:url" content="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/index.html">
 <meta property="og:site_name" content="Rui Shao&#39;s Blog">
-<meta property="og:description" content="当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故场景凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。Me">
+<meta property="og:description" content="当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-11T09:01:31.000Z">
-<meta property="article:modified_time" content="2026-02-11T10:58:19.356Z">
+<meta property="article:modified_time" content="2026-02-12T05:14:33.364Z">
 <meta property="article:author" content="Rui Shao">
 <meta property="article:tag" content="SRE">
 <meta property="article:tag" content="可观测性">
@@ -110,19 +110,22 @@
       
         <p><strong>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。</strong></p>
 <p>这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。</p>
-<h2 id="Part-0-改变一切的事故"><a href="#Part-0-改变一切的事故" class="headerlink" title="Part 0: 改变一切的事故"></a>Part 0: 改变一切的事故</h2><h3 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h3><p>凌晨 02:17。</p>
+<h2 id="Part-0-改变一切的事故">Part 0: 改变一切的事故</h2>
+<h3 id="场景">场景</h3>
+<p>凌晨 02:17。</p>
 <p>客户支持群开始出现第一条消息：某大客户请求大量超时。</p>
 <p>02:19。Oncall 被拉醒。</p>
 <p>02:21。Grafana dashboard 打开，一片绿色。</p>
 <p>CPU 正常。Memory 正常。Error rate 接近 0。</p>
 <p>系统看上去一切健康。</p>
 <p>02:25。更多客户报告超时。业务负责人进入会议：</p>
-<p>影响多少客户？影响范围多大？需要不要回滚？多久恢复？</p>
+<p>影响多少客户？影响范围多大？是否需要回滚？多久恢复？</p>
 <p>没人能回答。</p>
 <p>监控系统存在。但没有提供任何可以用于决策的信息。</p>
 <p>那一刻我们意识到：监控系统并没有坏，但它已经失效。</p>
 <p>这不是一个工具问题。这是一个系统设计问题。</p>
-<h3 id="崩塌"><a href="#崩塌" class="headerlink" title="崩塌"></a>崩塌</h3><p><strong>第一层崩塌：监控现实 ≠ 用户现实</strong></p>
+<h3 id="崩塌">崩塌</h3>
+<p><strong>第一层崩塌：监控现实 ≠ 用户现实</strong></p>
 <p>02:30，初步判断。</p>
 <p>Infra dashboard 显示：CPU &lt; 40%，Memory 正常，Network 正常，Pod 数量正常，没有明显的 error spike。</p>
 <p>但用户真实体验：请求超时，页面卡死，API latency &gt; 20秒。</p>
@@ -152,31 +155,39 @@
 <p>03:12。</p>
 <p>通过手动排查发现：某核心依赖服务，连接池耗尽，导致级联超时。</p>
 <p>但：infra metrics 没触发 alert，没有 dependency latency SLO，没有 per-client SLO，没有 request saturation 指标。</p>
-<p>监控没有错。只是没有监控到”真正的风险”。</p>
-<h3 id="认知"><a href="#认知" class="headerlink" title="认知"></a>认知</h3><p>这不是一次监控缺失的事故。而是一次监控系统设计暴露的事故。</p>
-<p>监控存在。Dashboard 存在。Alert 存在。但系统仍然处于”盲飞”状态。</p>
+<p>监控没有错。只是没有监控到&quot;真正的风险&quot;。</p>
+<h3 id="认知">认知</h3>
+<p>这不是一次监控缺失的事故。而是一次监控系统设计暴露的事故。</p>
+<p>监控存在。Dashboard 存在。Alert 存在。但系统仍然处于&quot;盲飞&quot;状态。</p>
 <p>我们拥有可观测性。但没有控制能力。</p>
 <p>Monitoring existed. But decision capability did not.</p>
-<h3 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h3><p>于是我们开始反思一个问题：</p>
+<h3 id="问题">问题</h3>
+<p>于是我们开始反思一个问题：</p>
 <p><strong>如果一个监控系统会死，它会死在哪里？</strong></p>
 <hr>
-<h2 id="Part-1-为什么-90-的监控系统没有价值"><a href="#Part-1-为什么-90-的监控系统没有价值" class="headerlink" title="Part 1: 为什么 90% 的监控系统没有价值"></a>Part 1: 为什么 90% 的监控系统没有价值</h2><h3 id="回到-02-17"><a href="#回到-02-17" class="headerlink" title="回到 02:17"></a>回到 02:17</h3><p>在 02:25，当管理层问”有多少用户受影响？”时，仪表盘无法回答。它显示了 CPU、内存、网络——基础设施工程师关心的一切。但它无法回答真正重要的问题。</p>
+<h2 id="Part-1-为什么-90-的监控系统没有价值">Part 1: 为什么 90% 的监控系统没有价值</h2>
+<h3 id="回到-02-17">回到 02:17</h3>
+<p>在 02:25，当管理层问&quot;有多少用户受影响？&quot;时，仪表盘无法回答。它显示了 CPU、内存、网络——基础设施工程师关心的一切。但它无法回答真正重要的问题。</p>
 <p>这就是为什么 90% 的监控系统没有价值：它们无法支持决策。</p>
-<h3 id="价值等式"><a href="#价值等式" class="headerlink" title="价值等式"></a>价值等式</h3><p>大多数监控系统测量了错误的东西。它们测量基础设施。它们不测量真正重要的：<strong>组织行动能力</strong>。</p>
+<h3 id="价值等式">价值等式</h3>
+<p>大多数监控系统测量了错误的东西。它们测量基础设施。它们不测量真正重要的：<strong>组织行动能力</strong>。</p>
 <p>监控的价值不在于数据本身。而在于它是否能影响行为和决策。如果它不能触发行动，它就是噪音。</p>
 <p>在 02:25，我们拥有数据。CPU 正常。内存正常。错误率很低。但我们无法决定：应该回滚吗？有多少用户受影响？爆炸半径是多少？</p>
-<p><strong>监控价值 &#x3D; 改变行为或决策的能力。</strong></p>
+<p><strong>监控价值 = 改变行为或决策的能力。</strong></p>
 <p>这是不变式。其他一切都是次要的。</p>
-<h3 id="为什么-CPU-90-不代表风险"><a href="#为什么-CPU-90-不代表风险" class="headerlink" title="为什么 CPU 90% 不代表风险"></a>为什么 CPU 90% 不代表风险</h3><p>这里有一个思想实验：CPU 90%。这意味着风险吗？</p>
+<h3 id="为什么-CPU-90-不代表风险">为什么 CPU 90% 不代表风险</h3>
+<p>这里有一个思想实验：CPU 90%。这意味着风险吗？</p>
 <p>答案是：看情况。</p>
 <p>CPU 90% 但没有用户影响？可能没问题。CPU 90% 但用户超时？问题。CPU 90% 在流量高峰时？预期。CPU 90% 在低流量时？可疑。</p>
 <p>原始指标不会告诉你风险。它们告诉你状态。风险需要解释。</p>
 <p>在我们的事故中，CPU 正常。但用户宕机了。指标没有错。它只是没有测量正确的东西。</p>
-<h3 id="信噪比"><a href="#信噪比" class="headerlink" title="信噪比"></a>信噪比</h3><p>在 02:25，我们有太多噪音（基础设施指标）和不够的信号（用户影响）。信噪比是倒置的。</p>
+<h3 id="信噪比">信噪比</h3>
+<p>在 02:25，我们有太多噪音（基础设施指标）和不够的信号（用户影响）。<strong>信噪比</strong>是倒置的。</p>
 <p>更多数据 → 更低信噪比 → 最终没人看。</p>
 <p>我们收集一切。我们对一切告警。最终，没人看。</p>
 <p>解决方案不是更多数据。而是更少噪音。主动减少信号。过滤。分组。提高置信度阈值。移除低价值指标。</p>
-<h3 id="决策延迟"><a href="#决策延迟" class="headerlink" title="决策延迟"></a>决策延迟</h3><p>行动能力的主要代理指标是<strong>决策延迟</strong>：从信号到行动决策的时间。</p>
+<h3 id="决策延迟">决策延迟</h3>
+<p>行动能力的主要代理指标是 <strong>决策延迟</strong>：从信号到行动决策的时间。</p>
 <p>在我们的事故中，决策延迟是无限的。我们有信号（CPU、内存）。但我们无法做出决策（回滚？扩容？等待？）。</p>
 <p>一个好的监控系统减少决策延迟。它不只是显示数据。它支持快速、正确的决策。</p>
 <p><strong>目标</strong>：关键事故 &lt; 5 分钟。</p>
@@ -186,23 +197,44 @@
 <li>决策：&lt; 2 分钟</li>
 </ul>
 <p>在 02:25，我们卡在解释阶段。我们无法解释信号对用户意味着什么。</p>
-<h3 id="真正的问题"><a href="#真正的问题" class="headerlink" title="真正的问题"></a>真正的问题</h3><p>真正的问题不是”我们应该收集什么指标？”而是”我们需要做出什么决策，什么信息能支持这些决策？”</p>
+<h3 id="真正的问题">真正的问题</h3>
+<p>真正的问题不是&quot;我们应该收集什么指标？“而是&quot;我们需要做出什么决策，什么信息能支持这些决策？”</p>
 <p>在我们的事故中，我们需要决定：回滚？扩容？等待？但我们没有信息来支持这些决策。</p>
-<p>大多数监控系统回答了错误的问题。它们回答”系统状态是什么？”而不是”我们应该做什么？”</p>
+<p>大多数监控系统回答了错误的问题。它们回答&quot;系统状态是什么？“而不是&quot;我们应该做什么？”</p>
 <hr>
-<h2 id="Part-2-监控系统是安全系统"><a href="#Part-2-监控系统是安全系统" class="headerlink" title="Part 2: 监控系统是安全系统"></a>Part 2: 监控系统是安全系统</h2><h3 id="回到-02-17-1"><a href="#回到-02-17-1" class="headerlink" title="回到 02:17"></a>回到 02:17</h3><p>在 02:25，我们无法回答：”我们安全吗？需要回滚吗？”</p>
+<h2 id="Part-2-监控系统是安全系统">Part 2: 监控系统是安全系统</h2>
+<h3 id="回到-02-17-2">回到 02:17</h3>
+<p>在 02:25，我们无法回答：“我们安全吗？需要回滚吗？”</p>
 <p>监控系统是安全系统。它的目的是风险检测和决策支持。不是指标收集。</p>
-<h3 id="安全，而非观察"><a href="#安全，而非观察" class="headerlink" title="安全，而非观察"></a>安全，而非观察</h3><p>想想飞机驾驶舱。你看不到原始高度、燃料、速度。你看到：”距离危险阈值”、”燃料足够到达目的地”、”接近失速速度”。</p>
+<h3 id="安全，而非观察">安全，而非观察</h3>
+<p>想想飞机驾驶舱。你看不到原始高度、燃料、速度。你看到：“距离危险阈值”、“燃料足够到达目的地”、“接近失速速度”。</p>
 <p>原始指标不如处理后的洞察有价值。</p>
 <p>转换很重要。</p>
 <p>监控不是关于显示高度。而是关于确保你不会坠毁。</p>
 <p>在 02:25，我们有原始指标（CPU、内存）。但我们没有安全信号（用户安全吗？风险在扩大吗？）。</p>
-<h3 id="控制循环"><a href="#控制循环" class="headerlink" title="控制循环"></a>控制循环</h3><p>监控是反馈控制系统。不是被动观察。</p>
-<p><strong>控制循环</strong>：现实 → 信号 → 解释 → 风险框架 → 决策 → 行动 → 系统变化 → 新现实。</p>
+<h3 id="控制循环">控制循环</h3>
+<p>监控是反馈控制系统。不是被动观察。</p>
+<p><strong>控制循环</strong>：现实 → 信号 → 解释 → <strong>风险框架</strong> → 决策 → 行动 → 系统变化 → 新现实。</p>
 <p>如果任何环节断裂，监控就变成观察噪音。</p>
-<p><strong>为什么需要这个图表</strong>：控制循环揭示了监控系统的本质是反馈控制，而非被动观察。每个环节的断裂都会导致系统失效，这个循环图帮助理解为什么”有数据但无法决策”。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">graph LR</span><br><span class="line">    A[现实&lt;br/&gt;User Reality] --&gt; B[信号&lt;br/&gt;Signal]</span><br><span class="line">    B --&gt; C[解释&lt;br/&gt;Interpretation]</span><br><span class="line">    C --&gt; D[风险框架&lt;br/&gt;Risk Framework]</span><br><span class="line">    D --&gt; E[决策&lt;br/&gt;Decision]</span><br><span class="line">    E --&gt; F[行动&lt;br/&gt;Action]</span><br><span class="line">    F --&gt; G[系统变化&lt;br/&gt;System Change]</span><br><span class="line">    G --&gt; A</span><br><span class="line">    </span><br><span class="line">    style B fill:#ffcccc</span><br><span class="line">    style C fill:#ffcccc</span><br><span class="line">    style D fill:#ffcccc</span><br><span class="line">    style E fill:#ffcccc</span><br><span class="line">    </span><br><span class="line">    B -.断裂点1: 基础设施信号&lt;br/&gt;非用户信号.-&gt; B</span><br><span class="line">    C -.断裂点2: 无法解释&lt;br/&gt;信号含义.-&gt; C</span><br><span class="line">    D -.断裂点3: 无SLO/错误预算&lt;br/&gt;无风险评估.-&gt; D</span><br><span class="line">    E -.断裂点4: 无法决定&lt;br/&gt;做什么.-&gt; E</span><br></pre></td></tr></table></figure>
-
+<p><strong>为什么需要这个图表</strong>：控制循环揭示了监控系统的本质是反馈控制，而非被动观察。每个环节的断裂都会导致系统失效，这个循环图帮助理解为什么&quot;有数据但无法决策&quot;。</p>
+<div class="mermaid">graph LR
+    A[现实&lt;br/&gt;User Reality] --&gt; B[信号&lt;br/&gt;Signal]
+    B --&gt; C[解释&lt;br/&gt;Interpretation]
+    C --&gt; D[风险框架&lt;br/&gt;Risk Framework]
+    D --&gt; E[决策&lt;br/&gt;Decision]
+    E --&gt; F[行动&lt;br/&gt;Action]
+    F --&gt; G[系统变化&lt;br/&gt;System Change]
+    G --&gt; A
+    
+    style B fill:#ffcccc
+    style C fill:#ffcccc
+    style D fill:#ffcccc
+    style E fill:#ffcccc
+    
+    B -.断裂点1: 基础设施信号&lt;br/&gt;非用户信号.-&gt; B
+    C -.断裂点2: 无法解释&lt;br/&gt;信号含义.-&gt; C
+    D -.断裂点3: 无SLO/错误预算&lt;br/&gt;无风险评估.-&gt; D
+    E -.断裂点4: 无法决定&lt;br/&gt;做什么.-&gt; E</div>
 <p>在我们的事故中，循环在多个点断裂：</p>
 <ul>
 <li><strong>信号</strong>：我们有基础设施信号，不是用户信号</li>
@@ -212,33 +244,39 @@
 <li><strong>行动</strong>：没有触发行动</li>
 </ul>
 <p>控制循环从未闭合。</p>
-<h3 id="控制理论问题"><a href="#控制理论问题" class="headerlink" title="控制理论问题"></a>控制理论问题</h3><p>在 02:25，我们有信号。但没有行动。控制循环断裂了。</p>
+<h3 id="控制理论问题">控制理论问题</h3>
+<p>在 02:25，我们有信号。但没有行动。控制循环断裂了。</p>
 <p><strong>振荡</strong>：告警风暴。告警触发行动。行动导致更多告警。反馈放大。那晚没看到。以前见过。一旦开始，很难停止。</p>
 <p><strong>噪音</strong>：误报。工程师静音。真实告警也被静音。那晚相反：基础设施指标正常，用户宕机。噪音掩盖信号。</p>
 <p><strong>延迟</strong>：数据滞后。陈旧数据。那晚数据新鲜。错误数据。CPU 指标新鲜。用户影响缺失。正确信号的延迟。</p>
 <p><strong>超调</strong>：过度反应。行动对信号反应过度。没看到。没有可过度反应的行动。</p>
 <p>控制循环从未闭合。信号存在。解释失败。决策失败。行动失败。</p>
-<h3 id="安全问题"><a href="#安全问题" class="headerlink" title="安全问题"></a>安全问题</h3><p>监控系统必须回答：<strong>我们安全吗？情况在变糟吗？需要行动吗？什么行动？</strong></p>
+<h3 id="安全问题">安全问题</h3>
+<p>监控系统必须回答：<strong>我们安全吗？情况在变糟吗？需要行动吗？什么行动？</strong></p>
 <p>如果它无法回答这些，它就不是安全系统。它是数据显示系统。</p>
 <p>在 02:25，我们无法回答任何这些。我们拥有可观测性。但没有安全。</p>
 <hr>
-<h2 id="Part-3-如何设计不会与生产一起死的监控系统"><a href="#Part-3-如何设计不会与生产一起死的监控系统" class="headerlink" title="Part 3: 如何设计不会与生产一起死的监控系统"></a>Part 3: 如何设计不会与生产一起死的监控系统</h2><h3 id="回到-02-17-2"><a href="#回到-02-17-2" class="headerlink" title="回到 02:17"></a>回到 02:17</h3><p>在 02:50，Prometheus 查询开始 OOM。高基数查询崩溃。仪表盘加载需要 40+ 秒。</p>
+<h2 id="Part-3-如何设计不会与生产一起死的监控系统">Part 3: 如何设计不会与生产一起死的监控系统</h2>
+<h3 id="回到-02-17-3">回到 02:17</h3>
+<p>在 02:50，Prometheus 查询开始 OOM。高基数查询崩溃。仪表盘加载需要 40+ 秒。</p>
 <p>如果 Prometheus 崩溃了，我们将完全失明。</p>
 <p>与生产一起死的监控系统是无用的。</p>
-<h3 id="生存能力是第一性原理"><a href="#生存能力是第一性原理" class="headerlink" title="生存能力是第一性原理"></a>生存能力是第一性原理</h3><p>监控系统 &#x3D; 关键基础设施。它必须比它监控的东西更稳定。不是同样稳定。更稳定。</p>
+<h3 id="生存能力是第一性原理">生存能力是第一性原理</h3>
+<p>监控系统 = 关键基础设施。<strong>生存能力</strong>必须匹配系统关键性——监控必须比被监控对象更稳定。它必须比它监控的东西更稳定。不是同样稳定。更稳定。</p>
 <p>我们特别需要在生产有问题时进行监控。如果监控本身不稳定，我们在最需要视力时失明。</p>
 <p>在我们的事故中，监控几乎失败。Prometheus 不稳定。查询很慢。仪表盘不可用。我们距离完全失明只差一次 Prometheus 崩溃。</p>
-<h3 id="生存能力层级"><a href="#生存能力层级" class="headerlink" title="生存能力层级"></a>生存能力层级</h3><p>在 02:50，Prometheus 查询 OOM。如果 Prometheus 崩溃，我们将失明。</p>
-<p>生存能力是频谱。不是二进制。</p>
+<h3 id="生存能力层级">生存能力层级</h3>
+<p>在 02:50，Prometheus 查询 OOM。如果 Prometheus 崩溃，我们将失明。</p>
+<p><strong>生存能力</strong>是频谱。不是二进制。</p>
 <p><strong>层级 0：与应用耦合</strong></p>
 <p>监控运行在与应用相同的基础设施上。应用崩溃，监控崩溃。零成本。开发环境可以。事故时无用。</p>
-<p><strong>层级 1：独立计算&#x2F;存储</strong></p>
+<p><strong>层级 1：独立计算/存储</strong></p>
 <p>监控有自己的 VM，自己的存储。应用崩溃？监控存活。区域失败？监控也失败。</p>
 <p>在 02:50，我们意识到：需要这个。监控几乎与生产一起死。那是组织投资的时候。不是之前。</p>
 <p><strong>层级 2：独立故障域</strong></p>
 <p>不同 AZ。不同网络。不同存储。应用崩溃？监控存活。AZ 失败？监控存活。区域失败？监控失败。</p>
 <p>我们不在那里。但我们看到了风险。如果 AZ 失败，监控失败。失明成本超过冗余成本。</p>
-<p><strong>层级 3：跨区域&#x2F;缓冲</strong></p>
+<p><strong>层级 3：跨区域/缓冲</strong></p>
 <p>多区域。缓冲。离线分析。在区域故障时存活。在网络分区时存活。</p>
 <p>事故成本数百万时。监控失败意味着业务失败时。失明不可接受时。</p>
 <p>生存能力必须匹配系统关键性。不是所有系统都需要多区域。但所有系统都需要独立于应用故障。</p>
@@ -256,7 +294,8 @@
 <th>适用场景</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>层级 0</strong></td>
 <td>与应用共享基础设施</td>
 <td>❌ 监控崩溃</td>
@@ -267,7 +306,7 @@
 </tr>
 <tr>
 <td><strong>层级 1</strong></td>
-<td>独立VM&#x2F;存储</td>
+<td>独立VM/存储</td>
 <td>✅ 监控存活</td>
 <td>❌ 监控失败</td>
 <td>❌ 监控失败</td>
@@ -292,25 +331,32 @@
 <td>高</td>
 <td>关键业务系统</td>
 </tr>
-</tbody></table>
-<h3 id="基数问题"><a href="#基数问题" class="headerlink" title="基数问题"></a>基数问题</h3><p>在 02:50，Prometheus 查询 OOM。高基数查询崩溃。</p>
-<p>我们没有看到它来。标签相乘。<code>service × region × instance × endpoint × status</code> &#x3D; 数百万时间序列。在稳定状态下工作的查询在事故期间失败。</p>
+</tbody>
+</table>
+<h3 id="基数问题">基数问题</h3>
+<p>在 02:50，Prometheus 查询 OOM。高基数查询崩溃。</p>
+<p>我们没有看到它来。标签相乘。<code>service × region × instance × endpoint × status</code> = 数百万时间序列。在稳定状态下工作的查询在事故期间失败。</p>
 <p>内存耗尽。查询变慢。存储成本爆炸。</p>
 <p>它成为生存威胁。如果 Prometheus 崩溃，我们将失明。这是生存能力失败。</p>
-<p>解决方案不是”使用更好的数据库”。而是标签治理。限制标签维度。使用记录规则。早期聚合。</p>
-<h3 id="元监控"><a href="#元监控" class="headerlink" title="元监控"></a>元监控</h3><p>你需要监控监控系统。但元监控必须比主监控更简单。否则你会得到递归。</p>
+<p>解决方案不是&quot;使用更好的数据库&quot;。而是标签治理。限制标签维度。使用记录规则。早期聚合。</p>
+<h3 id="元监控">元监控</h3>
+<p>你需要监控监控系统。但元监控必须比主监控更简单。否则你会得到递归。</p>
 <p>监控：监控系统可用性、数据收集成功率、查询性能、存储健康。</p>
 <p>在我们的事故中，我们不知道 Prometheus 在挣扎，直到查询开始失败。我们需要元监控来检测监控系统退化。</p>
 <hr>
-<h2 id="Part-4-可观测性存储是数据平台"><a href="#Part-4-可观测性存储是数据平台" class="headerlink" title="Part 4: 可观测性存储是数据平台"></a>Part 4: 可观测性存储是数据平台</h2><h3 id="回到-02-17-3"><a href="#回到-02-17-3" class="headerlink" title="回到 02:17"></a>回到 02:17</h3><p>为什么 Prometheus 查询 OOM？为什么仪表盘加载需要 40+ 秒？</p>
+<h2 id="Part-4-可观测性存储是数据平台">Part 4: 可观测性存储是数据平台</h2>
+<h3 id="回到-02-17-4">回到 02:17</h3>
+<p>为什么 Prometheus 查询 OOM？为什么仪表盘加载需要 40+ 秒？</p>
 <p>因为可观测性存储是数据平台问题，不是可视化问题。</p>
-<h3 id="核心是数据库，不是-Grafana"><a href="#核心是数据库，不是-Grafana" class="headerlink" title="核心是数据库，不是 Grafana"></a>核心是数据库，不是 Grafana</h3><p>在 02:50，Prometheus 查询 OOM。仪表盘加载需要 40+ 秒。为什么？</p>
-<p>大多数人认为监控 &#x3D; Grafana 仪表盘。但 Grafana 只是可视化。核心是数据库。</p>
+<h3 id="核心是数据库，不是-Grafana">核心是数据库，不是 Grafana</h3>
+<p>在 02:50，Prometheus 查询 OOM。仪表盘加载需要 40+ 秒。为什么？</p>
+<p>大多数人认为监控 = Grafana 仪表盘。但 Grafana 只是可视化。核心是数据库。</p>
 <p>查询失败，仪表盘失败。数据库挣扎，一切都挣扎。</p>
 <p>可观测性存储是数据平台。高频时间序列数据仓库。写重。读重。高基数。压缩。保留。成本压力。</p>
 <p>这不是 OLTP 数据库。这是不同的问题。</p>
 <p>在我们的事故中，数据平台失败了。查询 OOM。性能退化。这不是 Grafana 问题。这是数据库问题。可观测性存储的平台性质变得可见。</p>
-<h3 id="基数爆炸"><a href="#基数爆炸" class="headerlink" title="基数爆炸"></a>基数爆炸</h3><p>基数 &#x3D; 唯一时间序列的数量。<code>service × region × instance × endpoint × status</code> &#x3D; 爆炸。</p>
+<h3 id="基数爆炸">基数爆炸</h3>
+<p>基数 = 唯一时间序列的数量。<code>service × region × instance × endpoint × status</code> = 爆炸。</p>
 <p>高基数导致：</p>
 <ul>
 <li>内存耗尽（Prometheus OOM）</li>
@@ -319,34 +365,51 @@
 </ul>
 <p>解决方案：标签治理。限制标签维度。使用记录规则聚合。不要把高基数数据放在标签中（用户 ID、请求 ID）。</p>
 <p>在我们的事故中，我们有基数爆炸。标签相乘。之前工作的查询在事故期间失败。</p>
-<h3 id="存储分层"><a href="#存储分层" class="headerlink" title="存储分层"></a>存储分层</h3><p>在 02:50，仪表盘加载需要 40+ 秒。</p>
+<h3 id="存储分层">存储分层</h3>
+<p>在 02:50，仪表盘加载需要 40+ 秒。</p>
 <p>我们查询一切。热数据。温数据。冷数据。同时。在事故期间。</p>
 <p>热事故需要热数据。快速查询。昂贵存储。我们在热事故期间查询冷数据。</p>
 <p>我们没有优先排序。我们没有分离热和冷。</p>
-<h3 id="查询性能"><a href="#查询性能" class="headerlink" title="查询性能"></a>查询性能</h3><p>在 02:50，Prometheus 查询 OOM。</p>
+<h3 id="查询性能">查询性能</h3>
+<p>在 02:50，Prometheus 查询 OOM。</p>
 <p>仪表盘按需运行复杂查询。聚合。函数。跨序列连接。全部实时计算。在事故期间。</p>
 <p>我们没有预计算。我们没有缓存。我们按需计算一切。</p>
 <p>在事故期间，这些查询变慢。然后失败。然后 OOM。</p>
 <p>当我们需要速度时，我们得到了复杂度。</p>
 <hr>
-<h2 id="Part-5-从-CPU-到收入：监控层级跃迁"><a href="#Part-5-从-CPU-到收入：监控层级跃迁" class="headerlink" title="Part 5: 从 CPU 到收入：监控层级跃迁"></a>Part 5: 从 CPU 到收入：监控层级跃迁</h2><h3 id="回到-02-17-4"><a href="#回到-02-17-4" class="headerlink" title="回到 02:17"></a>回到 02:17</h3><p>CPU 正常。但客户宕机了。</p>
+<h2 id="Part-5-从-CPU-到收入：监控层级跃迁">Part 5: 从 CPU 到收入：监控层级跃迁</h2>
+<h3 id="回到-02-17-5">回到 02:17</h3>
+<p>CPU 正常。但客户宕机了。</p>
 <p>为什么我们看不到用户影响？</p>
 <p>因为监控在错误的层级。我们监控基础设施。我们应该监控业务价值。</p>
-<h3 id="层级层次结构"><a href="#层级层次结构" class="headerlink" title="层级层次结构"></a>层级层次结构</h3><p>在 02:25，管理层问：”有多少用户受影响？”</p>
+<h3 id="层级层次结构">层级层次结构</h3>
+<p>在 02:25，管理层问：“有多少用户受影响？”</p>
 <p>我们无法回答。我们有 CPU 指标。我们有内存指标。但我们没有用户影响指标。</p>
 <p>这就是层级问题。</p>
-<p>监控有层级。业务风险&#x2F;价值。模型&#x2F;逻辑。管道。服务。基础设施。</p>
-<p>更接近业务 &#x3D; 更接近真相。更接近基础设施 &#x3D; 更接近噪音。</p>
+<p>监控有层级。业务风险/价值。模型/逻辑。管道。服务。基础设施。</p>
+<p>更接近业务 = 更接近真相。更接近基础设施 = 更接近噪音。</p>
 <p>在我们的事故中，我们卡在基础设施层级。CPU 正常。内存正常。一切看起来正常。但用户宕机了。真相在业务层级。我们看不到它。</p>
 <p>这是失明。不是缺乏数据。是错误层级的数据。</p>
-<p><strong>为什么需要这个图表</strong>：监控层级揭示了为什么”指标正常但用户宕机”——监控在错误的抽象层级。图表展示了从基础设施到业务价值的层级结构，帮助理解决策能力与监控层级的关系。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">graph TD</span><br><span class="line">    A[业务风险/价值层&lt;br/&gt;用户影响、收入、SLO] --&gt;|更接近真相| B[模型/逻辑层&lt;br/&gt;业务逻辑、数据流]</span><br><span class="line">    B --&gt; C[管道层&lt;br/&gt;请求流、依赖链]</span><br><span class="line">    C --&gt; D[服务层&lt;br/&gt;服务健康、延迟]</span><br><span class="line">    D --&gt;|更接近噪音| E[基础设施层&lt;br/&gt;CPU、内存、网络]</span><br><span class="line">    </span><br><span class="line">    F[02:25事故] -.监控位置.-&gt; E</span><br><span class="line">    F -.真相位置.-&gt; A</span><br><span class="line">    </span><br><span class="line">    style A fill:#90EE90</span><br><span class="line">    style E fill:#FFB6C1</span><br><span class="line">    style F fill:#FFD700</span><br></pre></td></tr></table></figure>
-
-<h3 id="基础设施指标是低层级信号"><a href="#基础设施指标是低层级信号" class="headerlink" title="基础设施指标是低层级信号"></a>基础设施指标是低层级信号</h3><p>基础设施指标不是无用的。但它们是低层级信号。没有上下文化，它们是噪音。</p>
-<p>CPU 90% 不代表风险。CPU 90% 有用户影响 &#x3D; 风险。CPU 90% 在流量高峰时 &#x3D; 预期。</p>
+<p><strong>为什么需要这个图表</strong>：监控层级揭示了为什么&quot;指标正常但用户宕机&quot;——监控在错误的抽象层级。图表展示了从基础设施到业务价值的层级结构，帮助理解决策能力与监控层级的关系。</p>
+<div class="mermaid">graph TD
+    A[业务风险/价值层&lt;br/&gt;用户影响、收入、SLO] --&gt;|更接近真相| B[模型/逻辑层&lt;br/&gt;业务逻辑、数据流]
+    B --&gt; C[管道层&lt;br/&gt;请求流、依赖链]
+    C --&gt; D[服务层&lt;br/&gt;服务健康、延迟]
+    D --&gt;|更接近噪音| E[基础设施层&lt;br/&gt;CPU、内存、网络]
+    
+    F[02:25事故] -.监控位置.-&gt; E
+    F -.真相位置.-&gt; A
+    
+    style A fill:#90EE90
+    style E fill:#FFB6C1
+    style F fill:#FFD700</div>
+<h3 id="基础设施指标是低层级信号">基础设施指标是低层级信号</h3>
+<p>基础设施指标不是无用的。但它们是低层级信号。没有上下文化，它们是噪音。</p>
+<p>CPU 90% 不代表风险。CPU 90% 有用户影响 = 风险。CPU 90% 在流量高峰时 = 预期。</p>
 <p>上下文化很重要。基础设施指标需要映射到业务影响。</p>
 <p>在我们的事故中，CPU 正常。但我们没有映射到用户影响。所以我们看不到问题。</p>
-<h3 id="认知栈"><a href="#认知栈" class="headerlink" title="认知栈"></a>认知栈</h3><p><strong>原始信号</strong> → <strong>处理后的信号</strong> → <strong>风险解释</strong> → <strong>决策接口</strong> → <strong>行动</strong></p>
+<h3 id="认知栈">认知栈</h3>
+<p><strong>原始信号</strong> → <strong>处理后的信号</strong> → <strong>风险解释</strong> → <strong>决策接口</strong> → <strong>行动</strong></p>
 <p>如果解释或决策层级缺失，监控失败。</p>
 <p>在我们的事故中：</p>
 <ul>
@@ -357,7 +420,7 @@
 <li>行动：触发行为的告警（缺失）</li>
 </ul>
 <p>栈在风险解释处断裂。我们没有 SLO。没有错误预算。没有风险框架。</p>
-<p><strong>为什么需要这个表格</strong>：认知栈揭示了监控系统从原始信号到行动的完整链条。表格展示了每个层级的职责、02:25事故中的状态，以及缺失层级导致的决策失败，帮助理解为什么”有数据但无法行动”。</p>
+<p><strong>为什么需要这个表格</strong>：认知栈揭示了监控系统从原始信号到行动的完整链条。表格展示了每个层级的职责、02:25事故中的状态，以及缺失层级导致的决策失败，帮助理解为什么&quot;有数据但无法行动&quot;。</p>
 <table>
 <thead>
 <tr>
@@ -367,7 +430,8 @@
 <th>缺失后果</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>原始信号</strong></td>
 <td>CPU、内存、网络等基础设施指标</td>
 <td>✅ 存在</td>
@@ -389,7 +453,7 @@
 <td><strong>决策接口</strong></td>
 <td>回答关键问题的仪表盘</td>
 <td>❌ <strong>缺失</strong></td>
-<td>无法回答”影响面多大？需要回滚吗？”</td>
+<td>无法回答&quot;影响面多大？需要回滚吗？&quot;</td>
 </tr>
 <tr>
 <td><strong>行动</strong></td>
@@ -397,20 +461,26 @@
 <td>❌ <strong>缺失</strong></td>
 <td>无法触发回滚、扩容等行动</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><strong>断裂点</strong>：栈在风险解释处断裂，导致后续决策接口和行动都无法实现。</p>
-<h3 id="每客户-SLO"><a href="#每客户-SLO" class="headerlink" title="每客户 SLO"></a>每客户 SLO</h3><p>在我们的事故中，管理层问：”是单个客户吗？”</p>
+<h3 id="每客户-SLO">每客户 SLO</h3>
+<p>在我们的事故中，管理层问：“是单个客户吗？”</p>
 <p>我们无法回答，因为我们没有每客户 SLO。</p>
-<p>每客户 SLO 会显示：”客户 X 宕机，其他正常”或”所有客户受影响”。</p>
+<p>每客户 SLO 会显示：“客户 X 宕机，其他正常&quot;或&quot;所有客户受影响”。</p>
 <p>这是业务层级监控。不是基础设施层级。</p>
-<h3 id="价值流"><a href="#价值流" class="headerlink" title="价值流"></a>价值流</h3><p>监控价值流，不是基础设施。</p>
+<h3 id="价值流">价值流</h3>
+<p>监控价值流，不是基础设施。</p>
 <p>价值流：用户请求 → 服务 → 依赖 → 响应 → 用户体验</p>
 <p>基础设施：CPU、内存、网络、Pod</p>
 <p>在我们的事故中，我们监控基础设施。但价值流断裂了（连接池耗尽）。我们看不到它。</p>
 <hr>
-<h2 id="Part-6-如何设计支持决策的仪表盘"><a href="#Part-6-如何设计支持决策的仪表盘" class="headerlink" title="Part 6: 如何设计支持决策的仪表盘"></a>Part 6: 如何设计支持决策的仪表盘</h2><h3 id="回到-02-17-5"><a href="#回到-02-17-5" class="headerlink" title="回到 02:17"></a>回到 02:17</h3><p>如果我们在 02:25 有一个支持决策的仪表盘，它会显示什么？</p>
+<h2 id="Part-6-如何设计支持决策的仪表盘">Part 6: 如何设计支持决策的仪表盘</h2>
+<h3 id="回到-02-17-6">回到 02:17</h3>
+<p>如果我们在 02:25 有一个支持决策的仪表盘，它会显示什么？</p>
 <p>它会显示：用户影响、风险级别、推荐行动。不是 CPU、内存、错误率。</p>
-<h3 id="仪表盘问题"><a href="#仪表盘问题" class="headerlink" title="仪表盘问题"></a>仪表盘问题</h3><p>仪表盘必须回答：</p>
+<h3 id="仪表盘问题">仪表盘问题</h3>
+<p>仪表盘必须回答：</p>
 <ol>
 <li><strong>系统安全吗？</strong>（风险评估）</li>
 <li><strong>情况在变糟吗？</strong>（趋势分析）</li>
@@ -419,28 +489,35 @@
 </ol>
 <p>如果它无法回答这些，它就没有价值。</p>
 <p>在 02:25，我们的仪表盘无法回答任何这些。它显示了指标。但不是决策。</p>
-<h3 id="战术-vs-探索"><a href="#战术-vs-探索" class="headerlink" title="战术 vs 探索"></a>战术 vs 探索</h3><p><strong>战术监控</strong>（核心）：实时、行动绑定、决策聚焦。示例：Oncall 仪表盘、告警系统、SLO 监控器。</p>
+<h3 id="战术-vs-探索">战术 vs 探索</h3>
+<p><strong>战术监控</strong>（核心）：实时、行动绑定、决策聚焦。示例：Oncall 仪表盘、告警系统、SLO 监控器。</p>
 <p><strong>探索监控</strong>（次要）：历史、分析、洞察聚焦。示例：容量仪表盘、趋势分析、事后分析工具。</p>
 <p>核心监控必须是战术的。探索是有价值的但次要的。</p>
 <p>在我们的事故中，我们需要战术监控。但我们有探索（历史趋势、容量规划）。错误的类型。</p>
-<h3 id="决策延迟-1"><a href="#决策延迟-1" class="headerlink" title="决策延迟"></a>决策延迟</h3><p>仪表盘价值的主要代理指标是决策延迟：从打开仪表盘到做出决策的时间。</p>
+<h3 id="决策延迟-2">决策延迟</h3>
+<p>仪表盘价值的主要代理指标是决策延迟：从打开仪表盘到做出决策的时间。</p>
 <p>一个好的仪表盘减少决策延迟。它不只是显示数据。它支持快速决策。</p>
 <p>在 02:25，决策延迟是无限的。我们打开了仪表盘。我们看到了指标。但我们无法决定任何事情。</p>
-<h3 id="支持决策的仪表盘显示什么"><a href="#支持决策的仪表盘显示什么" class="headerlink" title="支持决策的仪表盘显示什么"></a>支持决策的仪表盘显示什么</h3><p>在 02:25，我们没有任何这些。我们有 CPU、内存、错误率。但不是决策。</p>
+<h3 id="支持决策的仪表盘显示什么">支持决策的仪表盘显示什么</h3>
+<p>在 02:25，我们没有任何这些。我们有 CPU、内存、错误率。但不是决策。</p>
 <p>如果我们有用户影响数据：有多少用户受影响？哪些用户？严重程度是什么？我们可以决定：现在回滚，还是等待。</p>
 <p>如果我们有风险级别：我们安全吗？风险在扩大吗？错误预算状态是什么？我们可以评估紧迫性。</p>
 <p>如果我们有推荐行动：回滚？扩容？等待？我们可以行动而不是猜测。</p>
 <p>如果我们有爆炸半径：是一个区域？一个服务？一个客户？还是广泛传播？我们可以确定事故范围。</p>
 <p>我们没有任何这些。我们有指标。但不是决策。</p>
-<h3 id="仪表盘设计原则"><a href="#仪表盘设计原则" class="headerlink" title="仪表盘设计原则"></a>仪表盘设计原则</h3><p>为事故条件设计仪表盘，不是稳定状态。</p>
+<h3 id="仪表盘设计原则">仪表盘设计原则</h3>
+<p>为事故条件设计仪表盘，不是稳定状态。</p>
 <p>在事故期间，你需要：快速决策、清晰行动、风险评估。</p>
 <p>在稳定状态期间，你需要：容量规划、趋势分析、优化。</p>
 <p>为事故设计。稳定状态价值是次要的。</p>
 <hr>
-<h2 id="Part-7-为什么大多数仪表盘没人看"><a href="#Part-7-为什么大多数仪表盘没人看" class="headerlink" title="Part 7: 为什么大多数仪表盘没人看"></a>Part 7: 为什么大多数仪表盘没人看</h2><h3 id="回到-02-17-6"><a href="#回到-02-17-6" class="headerlink" title="回到 02:17"></a>回到 02:17</h3><p>在 02:40，工程师开始 SSH 进机器。他们完全绕过了仪表盘。</p>
+<h2 id="Part-7-为什么大多数仪表盘没人看">Part 7: 为什么大多数仪表盘没人看</h2>
+<h3 id="回到-02-17-7">回到 02:17</h3>
+<p>在 02:40，工程师开始 SSH 进机器。他们完全绕过了仪表盘。</p>
 <p>为什么？</p>
 <p>因为仪表盘没有帮助。它显示了指标。但它无法支持决策。所以工程师找到了自己的路径。</p>
-<h3 id="信任崩塌"><a href="#信任崩塌" class="headerlink" title="信任崩塌"></a>信任崩塌</h3><p>监控系统是信任系统。一旦信任崩塌，工程师停止依赖它们。</p>
+<h3 id="信任崩塌">信任崩塌</h3>
+<p>监控系统是信任系统。一旦信任崩塌，工程师停止依赖它们。</p>
 <p><strong>信任崩塌症状</strong>：</p>
 <ul>
 <li>误报太频繁</li>
@@ -456,7 +533,8 @@
 <li>漏报（错过了真正的问题）</li>
 </ul>
 <p>一旦信任崩塌，工程师绕过监控。他们找到自己的路径。监控变得无用。</p>
-<h3 id="信任工程"><a href="#信任工程" class="headerlink" title="信任工程"></a>信任工程</h3><p>信任通过系统行为工程，不是声明。</p>
+<h3 id="信任工程">信任工程</h3>
+<p>信任通过系统行为工程，不是声明。</p>
 <p><strong>信任工程模式</strong>：</p>
 <ul>
 <li><strong>信任预算</strong>：为每个信任组件分配错误预算（误报、漏报、延迟）</li>
@@ -465,14 +543,16 @@
 <li><strong>信任监控</strong>：监控信任指标（静音率、绕过率、工程师调查）</li>
 </ul>
 <p>在我们的事故中，我们没有信任工程。没有信任预算。没有信任透明。没有信任监控。信任无声地崩塌了。</p>
-<h3 id="所有权模型"><a href="#所有权模型" class="headerlink" title="所有权模型"></a>所有权模型</h3><p>没有所有者 &#x3D; 不存在。但所有权可以以不同方式结构化：</p>
-<p><strong>单一所有者</strong>：一个人&#x2F;团队拥有告警&#x2F;仪表盘&#x2F;SLO。清晰问责，快速决策。</p>
-<p><strong>轮换所有者</strong>：所有权轮换（每周&#x2F;每月）。知识共享，负载分配。</p>
+<h3 id="所有权模型">所有权模型</h3>
+<p>没有所有者 = 不存在。但所有权可以以不同方式结构化：</p>
+<p><strong>单一所有者</strong>：一个人/团队拥有告警/仪表盘/SLO。清晰问责，快速决策。</p>
+<p><strong>轮换所有者</strong>：所有权轮换（每周/每月）。知识共享，负载分配。</p>
 <p><strong>共享所有权</strong>：一个负责，多个执行。共享知识，冗余。</p>
 <p><strong>社区所有权</strong>：社区维护，没有单一所有者。分布式维护，弹性。</p>
 <p><strong>要求</strong>：所有模型都需要明确结构。永远不模糊。</p>
 <p>在我们的事故中，我们有不清楚的所有权。仪表盘存在。但没有人拥有它们。所以它们衰败了。没有人维护它们。没有人信任它们。</p>
-<h3 id="为什么工程师绕过"><a href="#为什么工程师绕过" class="headerlink" title="为什么工程师绕过"></a>为什么工程师绕过</h3><p>工程师在以下情况绕过监控：</p>
+<h3 id="为什么工程师绕过">为什么工程师绕过</h3>
+<p>工程师在以下情况绕过监控：</p>
 <ul>
 <li>它没有帮助（无法回答问题）</li>
 <li>它不可靠（误报、缺失数据）</li>
@@ -482,9 +562,12 @@
 <p>在我们的事故中，我们拥有所有这些。所以工程师绕过了。他们 SSH。他们检查日志。他们找到了自己的路径。</p>
 <p>一旦工程师绕过监控，系统就失去了控制。</p>
 <hr>
-<h2 id="Part-8-风险驱动的监控（核心）"><a href="#Part-8-风险驱动的监控（核心）" class="headerlink" title="Part 8: 风险驱动的监控（核心）"></a>Part 8: 风险驱动的监控（核心）</h2><h3 id="回到-02-17-7"><a href="#回到-02-17-7" class="headerlink" title="回到 02:17"></a>回到 02:17</h3><p>如果我们按风险设计监控，我们会监控连接池饱和度。</p>
+<h2 id="Part-8-风险驱动的监控（核心）">Part 8: 风险驱动的监控（核心）</h2>
+<h3 id="回到-02-17-8">回到 02:17</h3>
+<p>如果我们按风险设计监控，我们会监控连接池饱和度。</p>
 <p>我们没有。我们监控 CPU、内存、错误率。但不是真正的风险。</p>
-<h3 id="风险映射"><a href="#风险映射" class="headerlink" title="风险映射"></a>风险映射</h3><p>事故后，我们问：我们应该监控什么？</p>
+<h3 id="风险映射">风险映射</h3>
+<p>事故后，我们问：我们应该监控什么？</p>
 <p>我们监控 CPU。我们监控内存。我们监控错误率。但我们没有监控连接池饱和度。我们没有监控依赖延迟。我们没有监控请求饱和度。</p>
 <p>为什么？因为 CPU 容易。内存容易。错误率容易。连接池饱和度？那需要思考风险。</p>
 <p><strong>我们应该先做什么？</strong></p>
@@ -494,7 +577,8 @@
 <p>然后：验证。我们能检测这个吗？能。告警触发正确的行动吗？能。信号可靠吗？能。</p>
 <p>我们跳过了这个。我们监控容易的。不是重要的。</p>
 <p>在我们的事故中，我们会在用户注意到之前发现问题。如果我们监控了连接池饱和度。如果我们按风险设计监控，而不是按指标。</p>
-<h3 id="风险问题"><a href="#风险问题" class="headerlink" title="风险问题"></a>风险问题</h3><p>监控必须回答：</p>
+<h3 id="风险问题">风险问题</h3>
+<p>监控必须回答：</p>
 <ul>
 <li><strong>我们在赚钱吗？</strong>（收入影响）</li>
 <li><strong>我们在伤害用户吗？</strong>（用户影响）</li>
@@ -504,13 +588,14 @@
 </ul>
 <p>如果它无法回答这些，它就没有存在价值。</p>
 <p>在 02:25，我们无法回答任何这些。我们有指标。但没有风险评估。</p>
-<h3 id="死亡模式根本原因"><a href="#死亡模式根本原因" class="headerlink" title="死亡模式根本原因"></a>死亡模式根本原因</h3><p><strong>死亡模式 1：存在但不被信任&#x2F;使用</strong></p>
+<h3 id="死亡模式根本原因">死亡模式根本原因</h3>
+<p><strong>死亡模式 1：存在但不被信任/使用</strong></p>
 <ul>
 <li>根本原因：信任崩塌、没有所有权、可用性差、没有行动绑定</li>
 </ul>
 <p><strong>死亡模式 2：告警噪音崩塌</strong></p>
 <ul>
-<li>根本原因：没有信号过滤、没有告警分组&#x2F;节流、没有置信度阈值、告警升级循环</li>
+<li>根本原因：没有信号过滤、没有告警分组/节流、没有置信度阈值、告警升级循环</li>
 </ul>
 <p><strong>死亡模式 3：系统脆弱性</strong></p>
 <ul>
@@ -545,7 +630,8 @@
 <th>02:25事故中是否出现</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>模式1：存在但不被信任</strong></td>
 <td>工程师绕过监控、SSH手动排查</td>
 <td>信任崩塌、无所有权、可用性差</td>
@@ -587,25 +673,31 @@
 <td>真实用户指标、正确SLO设计</td>
 <td>✅ 是（绿色但用户宕机）</td>
 </tr>
-</tbody></table>
-<h3 id="风险驱动设计"><a href="#风险驱动设计" class="headerlink" title="风险驱动设计"></a>风险驱动设计</h3><p>事故后，我们意识到：我们应该从风险开始。</p>
+</tbody>
+</table>
+<h3 id="风险驱动设计">风险驱动设计</h3>
+<p>事故后，我们意识到：我们应该从风险开始。</p>
 <p>我们应该问：什么会杀死我们？连接池耗尽导致级联超时。那会杀死我们。</p>
 <p>然后：什么信号表明这个？连接池利用率、依赖延迟、请求饱和度。</p>
 <p>然后：我们如何监控这个？池利用率 &gt; 80% 告警、依赖延迟 SLO、请求饱和度指标。</p>
 <p>然后：它有效吗？测试检测、测试行动、监控信任。</p>
 <p>我们会在用户注意到之前发现问题。但我们没有从风险开始。我们从指标开始。</p>
 <hr>
-<h2 id="Part-9-总结：它会死在哪里？"><a href="#Part-9-总结：它会死在哪里？" class="headerlink" title="Part 9: 总结：它会死在哪里？"></a>Part 9: 总结：它会死在哪里？</h2><h3 id="回到-02-17-8"><a href="#回到-02-17-8" class="headerlink" title="回到 02:17"></a>回到 02:17</h3><p>我们已经分析了监控死在哪里。现在：如何预防？</p>
+<h2 id="Part-9-总结：它会死在哪里？">Part 9: 总结：它会死在哪里？</h2>
+<h3 id="回到-02-17-9">回到 02:17</h3>
+<p>我们已经分析了监控死在哪里。现在：如何预防？</p>
 <p>在我们的事故中，多个死亡模式同时发生。但它们都追溯到一个根本原因：<strong>监控不是为不确定性下的组织决策能力而设计的</strong>。</p>
-<h3 id="六种死亡模式"><a href="#六种死亡模式" class="headerlink" title="六种死亡模式"></a>六种死亡模式</h3><ol>
-<li><strong>存在但不被信任&#x2F;使用</strong>：信任崩塌、没有所有权</li>
+<h3 id="六种死亡模式">六种死亡模式</h3>
+<ol>
+<li><strong>存在但不被信任/使用</strong>：信任崩塌、没有所有权</li>
 <li><strong>告警噪音崩塌</strong>：没有信号过滤、告警风暴</li>
 <li><strong>系统脆弱性</strong>：生产崩溃时监控崩溃</li>
 <li><strong>无法回答决策问题</strong>：原始指标、没有风险框架</li>
 <li><strong>与生产一起死</strong>：耦合架构、共享故障域</li>
 <li><strong>监控 ≠ 现实</strong>：虚假安全感、错误指标</li>
 </ol>
-<h3 id="预防框架"><a href="#预防框架" class="headerlink" title="预防框架"></a>预防框架</h3><p>回到 02:17。什么会预防这个？</p>
+<h3 id="预防框架">预防框架</h3>
+<p>回到 02:17。什么会预防这个？</p>
 <p>信任崩塌。仪表盘显示绿色。用户宕机。工程师绕过监控。信任断裂。</p>
 <p>监控几乎失败。Prometheus 挣扎。查询变慢。我们距离失明只差一次崩溃。生存能力失败。</p>
 <p>我们监控 CPU。不是风险。连接池耗尽杀死了我们。我们没有看到。风险驱动设计缺失。</p>
@@ -614,15 +706,18 @@
 <p>认知栈不完整。风险解释缺失。决策层缺失。行动缺失。</p>
 <p>一件事导致另一件事。信任崩塌 → 工程师绕过 → 监控变得无用。生存能力失败 → 监控与生产一起死 → 失明。风险驱动设计缺失 → 错误信号 → 错过问题。决策能力缺失 → 无法决定 → 没有行动。控制循环断裂 → 没有反馈 → 没有纠正。认知栈不完整 → 缺失层级 → 系统失败。</p>
 <p>断裂一个，断裂全部。</p>
-<h3 id="统一模型"><a href="#统一模型" class="headerlink" title="统一模型"></a>统一模型</h3><p>回到 02:17。什么断裂了？</p>
+<h3 id="统一模型">统一模型</h3>
+<p>回到 02:17。什么断裂了？</p>
 <p>现实 → 原始信号 → 聚合信号 → 风险解释 → 决策层 → 行动 → 系统变化 → 反馈。</p>
 <p>如果链条在任何层级断裂，监控失败。</p>
 <p>在我们的事故中，链条在多个层级断裂。风险解释：缺失。决策层：缺失。行动：缺失。</p>
 <p>我们有信号。我们有聚合。但我们没有解释。没有决策。没有行动。</p>
-<h3 id="核心原则"><a href="#核心原则" class="headerlink" title="核心原则"></a>核心原则</h3><p><strong>监控系统的唯一目的是在不确定性中维持组织行动能力。</strong></p>
+<h3 id="核心原则">核心原则</h3>
+<p><strong>监控系统的唯一目的是在不确定性中维持组织行动能力。</strong></p>
 <p>不是数据可见性。不是调试。不是指标收集。</p>
 <p><strong>行动能力。</strong></p>
-<h3 id="它会死在哪里？"><a href="#它会死在哪里？" class="headerlink" title="它会死在哪里？"></a>它会死在哪里？</h3><p><strong>如果一个监控系统会死，它会死在哪里？</strong></p>
+<h3 id="它会死在哪里？">它会死在哪里？</h3>
+<p><strong>如果一个监控系统会死，它会死在哪里？</strong></p>
 <p>信任崩塌。工程师停止依赖它。</p>
 <p>生存能力失败。与生产一起死。</p>
 <p>风险盲区。监控错误的东西。</p>
@@ -635,7 +730,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/" data-id="cuidugfU60biTYf9U1OvdagFc" data-title="监控系统会死在哪里：构建真正有效的生产控制系统" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/" data-id="cuidpZGAHTpz0lwaIlh7iaPts" data-title="监控系统会死在哪里：构建真正有效的生产控制系统" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -647,19 +742,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2026/02/11/2026-02-11_production-monitoring_en/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Where Monitoring Systems Die: Building Truly Effective Production Control Systems
+          拒绝死亡的生产系统
         
       </div>
     </a>
   
   
-    <a href="/2026/02/11/2026-02-11_ai-writing-modeling_en/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2026/02/11/2026-02-11_production-monitoring_en/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">In the AI Era, Writing Is No Longer Expression, But Modeling</div>
+      <div class="article-nav-title">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</div>
     </a>
   
 </nav>
@@ -726,15 +821,15 @@
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
-          </li>
-        
-          <li>
             <a href="/2026/02/11/2026-02-11_production-monitoring_zh/">监控系统会死在哪里：构建真正有效的生产控制系统</a>
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_ai-writing-modeling_en/">In the AI Era, Writing Is No Longer Expression, But Modeling</a>
+            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/11/2026-02-11_ai-writing-modeling_zh/">AI时代，写作不再是表达，而是建模</a>
           </li>
         
       </ul>
@@ -784,5 +879,6 @@
 
 
   </div>
-</body>
+<!-- hexo injector body_end start --><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: "default" });</script><!-- hexo injector body_end end --></body>
 </html>

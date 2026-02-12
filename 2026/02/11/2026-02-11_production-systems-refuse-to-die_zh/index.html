@@ -6,12 +6,12 @@
   
   <title>拒绝死亡的生产系统 | Rui Shao&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="生产系统首先是生存系统从第一性上，我们一直说生产环境生产环境，本质是什么？ Demo 系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统的目标是运行。生产系统的目标是存活。 当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。 生产系统的第一目标不是服务用户。而是避免自我毁灭。 这不是哲学">
+  <meta name="description" content="生产系统首先是生存系统 从第一性上，我们一直说生产环境生产环境，本质是什么？ Demo 系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统的目标是运行。生产系统的目标是存活。 当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。 生产系统的第一目标不是服务用户。而是避免自我毁灭。 这不是哲">
 <meta property="og:type" content="article">
 <meta property="og:title" content="拒绝死亡的生产系统">
 <meta property="og:url" content="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/index.html">
 <meta property="og:site_name" content="Rui Shao&#39;s Blog">
-<meta property="og:description" content="生产系统首先是生存系统从第一性上，我们一直说生产环境生产环境，本质是什么？ Demo 系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统的目标是运行。生产系统的目标是存活。 当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。 生产系统的第一目标不是服务用户。而是避免自我毁灭。 这不是哲学">
+<meta property="og:description" content="生产系统首先是生存系统 从第一性上，我们一直说生产环境生产环境，本质是什么？ Demo 系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统的目标是运行。生产系统的目标是存活。 当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。 生产系统的第一目标不是服务用户。而是避免自我毁灭。 这不是哲">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-11T10:47:32.000Z">
 <meta property="article:modified_time" content="2026-02-11T11:04:22.467Z">
@@ -109,7 +109,8 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="生产系统首先是生存系统"><a href="#生产系统首先是生存系统" class="headerlink" title="生产系统首先是生存系统"></a>生产系统首先是生存系统</h2><p>从第一性上，我们一直说生产环境生产环境，本质是什么？</p>
+        <h2 id="生产系统首先是生存系统">生产系统首先是生存系统</h2>
+<p>从第一性上，我们一直说生产环境生产环境，本质是什么？</p>
 <p>Demo 系统优化成功。生产系统优化生存。</p>
 <p>这是完全不同的物种。</p>
 <p>玩具系统的目标是<strong>运行</strong>。生产系统的目标是<strong>存活</strong>。</p>
@@ -131,26 +132,51 @@
 <li><strong>可控制</strong>（Controllable）——你可以控制系统</li>
 <li><strong>可恢复</strong>（Recoverable）——你可以从失败中恢复</li>
 </ol>
-<p>还有两个：<br>4. <strong>可隔离</strong>（Isolatable）——问题被局部化，不会扩散<br>5. <strong>可演练</strong>（Exercisable）——你可以练习故障场景</p>
+<p>还有两个：<br>
+4. <strong>可隔离</strong>（Isolatable）——问题被局部化，不会扩散<br>
+5. <strong>可演练</strong>（Exercisable）——你可以练习故障场景</p>
 <p>生产系统是能够安全失败的系统。它不会扩散。它不会失控。它可以恢复。它可以被解释。</p>
-<p>这适用于成熟或关键任务的生产环境——数据丢失、长期停机或不受控制的爆炸半径是存在性威胁的系统。不适用于早期增长阶段的系统，那里停机在战略上是可容忍的。不适用于”系统生存”和”业务生存”解耦的系统。</p>
+<p>这适用于成熟或关键任务的生产环境——数据丢失、长期停机或不受控制的爆炸半径是存在性威胁的系统。不适用于早期增长阶段的系统，那里停机在战略上是可容忍的。不适用于&quot;系统生存&quot;和&quot;业务生存&quot;解耦的系统。</p>
 <p>当生存阈值被跨越时，架构会收敛到那些限制爆炸半径、保持可恢复性、并在故障下仍可由人类操作的形态。</p>
-<p>多集群、主被动真相模型和隔离&#x2F;单元结构是对该约束的反复出现的结构响应。</p>
+<p>多集群、主被动真相模型和隔离/单元结构是对该约束的反复出现的结构响应。</p>
 <hr>
-<h2 id="单集群的故障域"><a href="#单集群的故障域" class="headerlink" title="单集群的故障域"></a>单集群的故障域</h2><p>单集群为效率而存在。多集群为生存而存在。</p>
+<h2 id="单集群的故障域">单集群的故障域</h2>
+<p>单集群为效率而存在。多集群为生存而存在。</p>
 <p>当数据跨机器时，一切都变得复杂。复制。分区。事务。但这不是多集群出现的原因。</p>
 <p>不是因为 QPS 上升。甚至不是因为数据太大。</p>
 <p>而是因为：<strong>单个故障域不再可接受</strong>。</p>
-<p>故障域 &#x3D; 单个错误可以摧毁的最大范围。</p>
+<p>故障域 = 单个错误可以摧毁的最大范围。</p>
 <p>使用单集群：</p>
 <ul>
-<li>故障域 &#x3D; 整个公司</li>
+<li>故障域 = 整个公司</li>
 </ul>
-<p>一次区域故障。一次云控制平面故障。一次网络隔离。一次 DNS&#x2F;路由错误。一次人为错误。</p>
+<p>一次区域故障。一次云控制平面故障。一次网络隔离。一次 DNS/路由错误。一次人为错误。</p>
 <p>全部系统一起死。Everything dies together.</p>
 <p><strong>故障域边界对比：</strong> 下图揭示了单集群与多集群在故障边界上的根本差异，展示为什么故障域决定了架构选择。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">graph TB</span><br><span class="line">    subgraph &quot;单集群架构&quot;</span><br><span class="line">        SC[单集群&lt;br/&gt;故障域 = 整个公司]</span><br><span class="line">        SC --&gt; SC_FAIL[任何故障&lt;br/&gt;→ 全部系统死亡]</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    subgraph &quot;多集群架构&quot;</span><br><span class="line">        MC1[集群 A&lt;br/&gt;故障域 = 集群 A]</span><br><span class="line">        MC2[集群 B&lt;br/&gt;故障域 = 集群 B]</span><br><span class="line">        MC3[集群 C&lt;br/&gt;故障域 = 集群 C]</span><br><span class="line">        </span><br><span class="line">        MC1 --&gt; MC1_FAIL[故障 A&lt;br/&gt;→ 仅影响集群 A]</span><br><span class="line">        MC2 --&gt; MC2_FAIL[故障 B&lt;br/&gt;→ 仅影响集群 B]</span><br><span class="line">        MC3 --&gt; MC3_FAIL[故障 C&lt;br/&gt;→ 仅影响集群 C]</span><br><span class="line">    end</span><br><span class="line">    </span><br><span class="line">    style SC fill:#ff6b6b</span><br><span class="line">    style SC_FAIL fill:#ff6b6b</span><br><span class="line">    style MC1 fill:#51cf66</span><br><span class="line">    style MC2 fill:#51cf66</span><br><span class="line">    style MC3 fill:#51cf66</span><br><span class="line">    style MC1_FAIL fill:#ffd43b</span><br><span class="line">    style MC2_FAIL fill:#ffd43b</span><br><span class="line">    style MC3_FAIL fill:#ffd43b</span><br></pre></td></tr></table></figure>
-
+<div class="mermaid">graph TB
+    subgraph &quot;单集群架构&quot;
+        SC[单集群&lt;br/&gt;故障域 = 整个公司]
+        SC --&gt; SC_FAIL[任何故障&lt;br/&gt;→ 全部系统死亡]
+    end
+    
+    subgraph &quot;多集群架构&quot;
+        MC1[集群 A&lt;br/&gt;故障域 = 集群 A]
+        MC2[集群 B&lt;br/&gt;故障域 = 集群 B]
+        MC3[集群 C&lt;br/&gt;故障域 = 集群 C]
+        
+        MC1 --&gt; MC1_FAIL[故障 A&lt;br/&gt;→ 仅影响集群 A]
+        MC2 --&gt; MC2_FAIL[故障 B&lt;br/&gt;→ 仅影响集群 B]
+        MC3 --&gt; MC3_FAIL[故障 C&lt;br/&gt;→ 仅影响集群 C]
+    end
+    
+    style SC fill:#ff6b6b
+    style SC_FAIL fill:#ff6b6b
+    style MC1 fill:#51cf66
+    style MC2 fill:#51cf66
+    style MC3 fill:#51cf66
+    style MC1_FAIL fill:#ffd43b
+    style MC2_FAIL fill:#ffd43b
+    style MC3_FAIL fill:#ffd43b</div>
 <p>这直接决定了单集群在生产环境中是不够的。不是因为它无法扩展。不是因为它无法执行。因为故障域不可接受。</p>
 <p>当生存阈值被跨越时——当长期故障变得不可接受时——单集群成为一个陷阱。</p>
 <p>组织表面积成倍增加风险：团队数量 × 部署频率 × 配置复杂度 × 爆炸半径。随着这个增加，风险非线性增长。</p>
@@ -163,7 +189,8 @@
 </ul>
 <p>当这些汇聚时，单集群不再可生存。</p>
 <hr>
-<h2 id="为什么生存系统收敛到多集群"><a href="#为什么生存系统收敛到多集群" class="headerlink" title="为什么生存系统收敛到多集群"></a>为什么生存系统收敛到多集群</h2><p>多集群为生存而存在，不为效率。</p>
+<h2 id="为什么生存系统收敛到多集群">为什么生存系统收敛到多集群</h2>
+<p>多集群为生存而存在，不为效率。</p>
 <p>从第一性原理，它不是为扩展。它是为了将故障和爆炸半径保持在可接受的范围内。</p>
 <p>这是一个收敛模式，不是确定性演化。当操作风险超过阈值时，系统会收敛到多集群。路径和时间各不相同，但模式是一致的。</p>
 <p>三个触发条件驱动收敛：</p>
@@ -177,7 +204,8 @@
 <th>风险类型</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>区域故障不可接受</strong></td>
 <td>区域故障会摧毁业务</td>
 <td>HA 多集群（主-备）</td>
@@ -185,17 +213,18 @@
 </tr>
 <tr>
 <td><strong>数据分区必要</strong></td>
-<td>数据库必须分片、缓存&#x2F;队列分区</td>
+<td>数据库必须分片、缓存/队列分区</td>
 <td>扩展多集群（数据跟随）</td>
 <td>容量风险</td>
 </tr>
 <tr>
 <td><strong>组织规模超阈值</strong></td>
 <td>不敢 deploy、不敢改、爆炸半径存在性</td>
-<td>隔离多集群（单元&#x2F;租户）</td>
+<td>隔离多集群（单元/租户）</td>
 <td>操作风险</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p><strong>1. 区域故障变得不可接受</strong></p>
 <p>当单个区域不再是可靠的锚点时——当区域故障会摧毁业务时——HA 多集群变得必要。</p>
 <p><strong>2. 数据分区变得必要</strong></p>
@@ -210,7 +239,8 @@
 <p>当这种情况发生时，多集群成为必需品——不是为了扩展，而是为了组织可扩展性。</p>
 <p>生存压力是占主导地位的长期选择力量。即使短期驱动因素不同（供应商锁定、合规性、惯性），在高可靠性环境中持续存在的架构模式往往是那些保持可操作性和有界故障的模式。</p>
 <hr>
-<h2 id="HA、扩展、隔离：三种故障模式的三种响应"><a href="#HA、扩展、隔离：三种故障模式的三种响应" class="headerlink" title="HA、扩展、隔离：三种故障模式的三种响应"></a>HA、扩展、隔离：三种故障模式的三种响应</h2><p>不同的目标产生不同的架构。不同的故障模式需要不同的响应。</p>
+<h2 id="HA、扩展、隔离：三种故障模式的三种响应">HA、扩展、隔离：三种故障模式的三种响应</h2>
+<p>不同的目标产生不同的架构。不同的故障模式需要不同的响应。</p>
 <p>你构建多集群：</p>
 <ul>
 <li>为了生存？（外部故障仍然可用）</li>
@@ -228,7 +258,8 @@
 <th>隔离多集群</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>目标</strong></td>
 <td>从外部故障生存</td>
 <td>增长期间生存</td>
@@ -237,7 +268,7 @@
 <tr>
 <td><strong>故障模式</strong></td>
 <td>外部故障（区域、云提供商）</td>
-<td>扩展故障（流量&#x2F;数据超容量）</td>
+<td>扩展故障（流量/数据超容量）</td>
 <td>内部故障（部署错误、配置错误、过载）</td>
 </tr>
 <tr>
@@ -255,20 +286,20 @@
 <tr>
 <td><strong>典型形式</strong></td>
 <td>主-备区域</td>
-<td>地理分布式（美国&#x2F;欧盟&#x2F;亚洲）</td>
+<td>地理分布式（美国/欧盟/亚洲）</td>
 <td>单元架构、每租户集群</td>
 </tr>
 <tr>
 <td><strong>数据模型</strong></td>
 <td>数据复制</td>
-<td>数据分区&#x2F;分片</td>
+<td>数据分区/分片</td>
 <td>数据隔离</td>
 </tr>
 <tr>
 <td><strong>故障域</strong></td>
 <td>区域级别</td>
 <td>区域级别</td>
-<td>单元&#x2F;租户级别</td>
+<td>单元/租户级别</td>
 </tr>
 <tr>
 <td><strong>主要成本</strong></td>
@@ -282,8 +313,10 @@
 <td>数据必须分片时</td>
 <td>组织规模超过安全操作阈值</td>
 </tr>
-</tbody></table>
-<h3 id="HA-多集群：从外部生存"><a href="#HA-多集群：从外部生存" class="headerlink" title="HA 多集群：从外部生存"></a>HA 多集群：从外部生存</h3><p><strong>故障模式：</strong> 外部故障（区域故障、云提供商故障）</p>
+</tbody>
+</table>
+<h3 id="HA-多集群：从外部生存">HA 多集群：从外部生存</h3>
+<p><strong>故障模式：</strong> 外部故障（区域故障、云提供商故障）</p>
 <p><strong>架构：</strong> 基于复制（DDIA “replication”）</p>
 <p><strong>第一性原理：</strong> 不是扩展，不是延迟。当整个集群或区域死亡时，系统仍然存在。</p>
 <p>区域死亡不能带走公司。</p>
@@ -293,11 +326,12 @@
 <li>故障转移必须可演练（你可以练习它）</li>
 <li>故障转移必须可回滚</li>
 </ul>
-<p>否则多集群 &#x3D; 更大的灾难。</p>
+<p>否则多集群 = 更大的灾难。</p>
 <p><strong>权衡：</strong> 为可靠性牺牲效率。</p>
 <p>备用成本。数据复制成本。架构复杂度。操作复杂度。</p>
 <p>但这是唯一真正提高外部故障生存能力的多集群类型。</p>
-<h3 id="扩展多集群：增长期间的生存"><a href="#扩展多集群：增长期间的生存" class="headerlink" title="扩展多集群：增长期间的生存"></a>扩展多集群：增长期间的生存</h3><p><strong>故障模式：</strong> 扩展故障（流量&#x2F;数据超过容量）</p>
+<h3 id="扩展多集群：增长期间的生存">扩展多集群：增长期间的生存</h3>
+<p><strong>故障模式：</strong> 扩展故障（流量/数据超过容量）</p>
 <p><strong>架构：</strong> 基于分区（DDIA “partition”）</p>
 <p><strong>第一性原理：</strong> 这是性能问题，不是生存问题。</p>
 <p>典型形式：地理分布式集群（美国集群、欧盟集群、亚洲集群）。每个服务本地用户。</p>
@@ -315,20 +349,23 @@
 <li>集群 C → 分片 3</li>
 </ul>
 <p>计算最终跟随数据。</p>
-<p>此时：多集群 &#x3D; 数据拓扑的映射。</p>
-<h3 id="隔离多集群：从自身生存"><a href="#隔离多集群：从自身生存" class="headerlink" title="隔离多集群：从自身生存"></a>隔离多集群：从自身生存</h3><p><strong>故障模式：</strong> 内部故障（部署错误、配置错误、客户过载、噪声邻居）</p>
+<p>此时：多集群 = 数据拓扑的映射。</p>
+<h3 id="隔离多集群：从自身生存">隔离多集群：从自身生存</h3>
+<p><strong>故障模式：</strong> 内部故障（部署错误、配置错误、客户过载、噪声邻居）</p>
 <p><strong>架构：</strong> 基于单元</p>
 <p><strong>第一性原理：</strong> 将系统拆分为多个独立的故障域。</p>
 <p>每个集群是一个单元。</p>
 <p>典型形式：</p>
 <ul>
-<li><strong>单元架构：</strong> Amazon&#x2F;Stripe&#x2F;Uber 模式<ul>
+<li><strong>单元架构：</strong> Amazon/Stripe/Uber 模式
+<ul>
 <li>单元 1 → 用户 0-100万</li>
 <li>单元 2 → 用户 100万-200万</li>
 <li>单元 3 → 用户 200万-300万</li>
 </ul>
 </li>
-<li><strong>每租户集群：</strong> B2B SaaS 模式<ul>
+<li><strong>每租户集群：</strong> B2B SaaS 模式
+<ul>
 <li>企业 A → 集群 A</li>
 <li>企业 B → 集群 B</li>
 <li>企业 C → 集群 C</li>
@@ -361,7 +398,8 @@
 <p>但好处是巨大的：<strong>系统可以持续演进而不自我毁灭</strong>。</p>
 <p>HA 让它从外部存活。扩展让它在增长期间存活。隔离让它从自身存活。</p>
 <hr>
-<h2 id="为什么主动-主动模式退却：状态模糊性问题"><a href="#为什么主动-主动模式退却：状态模糊性问题" class="headerlink" title="为什么主动-主动模式退却：状态模糊性问题"></a>为什么主动-主动模式退却：状态模糊性问题</h2><p>为什么几乎所有的生产主动-主动多集群系统最终都会退却到主动-被动 + 隔离？</p>
+<h2 id="为什么主动-主动模式退却：状态模糊性问题">为什么主动-主动模式退却：状态模糊性问题</h2>
+<p>为什么几乎所有的生产主动-主动多集群系统最终都会退却到主动-被动 + 隔离？</p>
 <p>这是行业收敛模式。不是理论。十多年生产经验。</p>
 <p>每个系统都梦想主动-主动。大多数最终退却到主动-被动 + 隔离。</p>
 <p>在纸面上，主动-主动是完美的：</p>
@@ -380,7 +418,8 @@
 </ul>
 <p>核心问题不是系统是否会宕机。</p>
 <p>而是：<strong>当它没有宕机但状态不同步时，没有人知道真实状态</strong>。</p>
-<h3 id="状态模糊性作为认知负载"><a href="#状态模糊性作为认知负载" class="headerlink" title="状态模糊性作为认知负载"></a>状态模糊性作为认知负载</h3><p>主动-主动的基本成本：<strong>不再存在单一真相来源</strong>。</p>
+<h3 id="状态模糊性作为认知负载">状态模糊性作为认知负载</h3>
+<p>主动-主动的基本成本：<strong>不再存在单一真相来源</strong>。</p>
 <p>你会遇到：</p>
 <ul>
 <li>双写冲突</li>
@@ -415,13 +454,14 @@
 <p>因为：<strong>系统行为是多个真相状态的叠加</strong>。</p>
 <p>调试从确定性转变为概率性。</p>
 <p>许多团队经历他们的第一次多区域主动-主动故障并意识到：<strong>我们无法理解这个系统</strong>。</p>
-<h3 id="可操作性谱"><a href="#可操作性谱" class="headerlink" title="可操作性谱"></a>可操作性谱</h3><p>人类可操作性存在于一个谱上：</p>
+<h3 id="可操作性谱">可操作性谱</h3>
+<p>人类可操作性存在于一个谱上：</p>
 <ul>
 <li><strong>确定性可操作性：</strong> 单一真相来源，清晰的因果关系，可预测的行为</li>
 <li><strong>概率性可操作性：</strong> 多个可能状态，不清楚的因果关系，需要统计推理</li>
 <li><strong>不可操作：</strong> 状态模糊性超过人类推理能力，无法确定真相或恢复路径</li>
 </ul>
-<p>主动-主动下降到概率性&#x2F;不可操作。</p>
+<p>主动-主动下降到概率性/不可操作。</p>
 <p><strong>可操作性对比：</strong> 下表对比不同架构模式在事件响应中的可操作性，揭示为什么主动-主动模式在故障时不可操作。</p>
 <table>
 <thead>
@@ -434,7 +474,8 @@
 <th>可操作性等级</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td><strong>单集群</strong></td>
 <td>✅ 单一真相</td>
 <td>✅ 单一控制点</td>
@@ -448,7 +489,7 @@
 <td>❌ 控制哪个集群？</td>
 <td>❌ 恢复到哪个状态？</td>
 <td>❌ 故障已模糊</td>
-<td>概率性&#x2F;不可操作</td>
+<td>概率性/不可操作</td>
 </tr>
 <tr>
 <td><strong>主动-被动</strong></td>
@@ -466,8 +507,9 @@
 <td>✅ 故障域有界</td>
 <td>确定性可操作+有界故障</td>
 </tr>
-</tbody></table>
-<p>在事件期间，你需要有界时间可操作性：操作员必须在事件响应窗口内（分钟&#x2F;小时，不是天）确定真相和恢复路径。</p>
+</tbody>
+</table>
+<p>在事件期间，你需要有界时间可操作性：操作员必须在事件响应窗口内（分钟/小时，不是天）确定真相和恢复路径。</p>
 <p>主动-主动使这变得不可能。</p>
 <p>通过事件响应镜头：</p>
 <ul>
@@ -476,13 +518,13 @@
 <li><strong>你能恢复吗？</strong> 不能——你应该恢复到哪个状态？</li>
 <li><strong>你能防止扩散吗？</strong> 不能——故障已经是模糊的</li>
 </ul>
-<p>这适用于由正常工程组织操作的应用程序&#x2F;数据多写入系统。不适用于基础设施层主动-主动（CDN、DNS），它们可以在不同约束下成功。</p>
-<p>短期可靠性可以通过冗余&#x2F;自动化存在。但长期生产生存能力需要人类可操作性——某种人类可恢复的真相和干预路径。</p>
+<p>这适用于由正常工程组织操作的应用程序/数据多写入系统。不适用于基础设施层主动-主动（CDN、DNS），它们可以在不同约束下成功。</p>
+<p>短期可靠性可以通过冗余/自动化存在。但长期生产生存能力需要人类可操作性——某种人类可恢复的真相和干预路径。</p>
 <hr>
-<h2 id="主动-被动-隔离：恢复人类可操作性"><a href="#主动-被动-隔离：恢复人类可操作性" class="headerlink" title="主动-被动 + 隔离：恢复人类可操作性"></a>主动-被动 + 隔离：恢复人类可操作性</h2><p>退却的核心原因：<strong>必须恢复可理解性</strong>。</p>
+<h2 id="主动-被动-隔离：恢复人类可操作性">主动-被动 + 隔离：恢复人类可操作性</h2>
+<p>退却的核心原因：<strong>必须恢复可理解性</strong>。</p>
 <p>主动-被动重新引入：<strong>单一真相来源</strong>。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">主集群 → 真相</span><br><span class="line">备用 → 备份</span><br></pre></td></tr></table></figure>
-
 <p>这带来三个巨大好处：</p>
 <p><strong>1. 状态清晰</strong></p>
 <p>只有一个真相。</p>
@@ -518,13 +560,41 @@
 <li>隔离：多个真相，有界域（可生存）</li>
 </ul>
 <p><strong>架构演进路径：</strong> 下图揭示了生产系统从单集群到最终收敛模式的演进逻辑，展示为什么主动-主动会退却以及隔离如何恢复可操作性。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">stateDiagram-v2</span><br><span class="line">    [*] --&gt; 单集群: 初始状态&lt;br/&gt;单一真相来源</span><br><span class="line">    </span><br><span class="line">    单集群 --&gt; 主动主动: 追求高可用&lt;br/&gt;无单点故障</span><br><span class="line">    </span><br><span class="line">    主动主动 --&gt; 主动被动: 状态模糊性&lt;br/&gt;人类不可操作</span><br><span class="line">    </span><br><span class="line">    主动被动 --&gt; 主动被动隔离: 爆炸半径过大&lt;br/&gt;需要限制故障域</span><br><span class="line">    </span><br><span class="line">    主动被动隔离: 确定性可操作性&lt;br/&gt;+ 有界故障域</span><br><span class="line">    </span><br><span class="line">    note right of 单集群</span><br><span class="line">        简单但故障域 = 整个公司</span><br><span class="line">    end note</span><br><span class="line">    </span><br><span class="line">    note right of 主动主动</span><br><span class="line">        多个真相状态叠加</span><br><span class="line">        调试从确定性变概率性</span><br><span class="line">    end note</span><br><span class="line">    </span><br><span class="line">    note right of 主动被动</span><br><span class="line">        恢复单一真相来源</span><br><span class="line">        但爆炸半径仍巨大</span><br><span class="line">    end note</span><br><span class="line">    </span><br><span class="line">    note right of 主动被动隔离</span><br><span class="line">        收敛模式</span><br><span class="line">        人类可操作 + 有界故障</span><br><span class="line">    end note</span><br></pre></td></tr></table></figure>
-
+<div class="mermaid">stateDiagram-v2
+    [*] --&gt; 单集群: 初始状态&lt;br/&gt;单一真相来源
+    
+    单集群 --&gt; 主动主动: 追求高可用&lt;br/&gt;无单点故障
+    
+    主动主动 --&gt; 主动被动: 状态模糊性&lt;br/&gt;人类不可操作
+    
+    主动被动 --&gt; 主动被动隔离: 爆炸半径过大&lt;br/&gt;需要限制故障域
+    
+    主动被动隔离: 确定性可操作性&lt;br/&gt;+ 有界故障域
+    
+    note right of 单集群
+        简单但故障域 = 整个公司
+    end note
+    
+    note right of 主动主动
+        多个真相状态叠加
+        调试从确定性变概率性
+    end note
+    
+    note right of 主动被动
+        恢复单一真相来源
+        但爆炸半径仍巨大
+    end note
+    
+    note right of 主动被动隔离
+        收敛模式
+        人类可操作 + 有界故障
+    end note</div>
 <p>这条路径几乎是普遍的行业经验。</p>
 <hr>
-<h2 id="生存的架构"><a href="#生存的架构" class="headerlink" title="生存的架构"></a>生存的架构</h2><p>当系统的长期故障对组织变得不可接受时，它就不再仅仅是服务系统，而成为生存系统。</p>
+<h2 id="生存的架构">生存的架构</h2>
+<p>当系统的长期故障对组织变得不可接受时，它就不再仅仅是服务系统，而成为生存系统。</p>
 <p>此时，架构会收敛到那些限制爆炸半径、保持可恢复性、并在故障下仍可由人类操作的形态。</p>
-<p>多集群、主动-被动真相模型和隔离&#x2F;单元结构是在人类操作限制下对该约束的反复出现的结构响应。</p>
+<p>多集群、主动-被动真相模型和隔离/单元结构是在人类操作限制下对该约束的反复出现的结构响应。</p>
 <p>这是一个收敛模式，不是确定性演化。当操作风险超过阈值时，系统会收敛。路径和时间各不相同，但模式是一致的。</p>
 <p>人类可操作性是硬可靠性约束，不是便利性。</p>
 <p>可理解性——存在一个足以进行安全干预的可确定因果模型——不是可有可无的。它是持续的人类操作生产系统所必需的。</p>
@@ -535,7 +605,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/" data-id="cuidbzemjU2xG_f6NlU6expVa" data-title="拒绝死亡的生产系统" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/" data-id="cuidqpCIXWNeHlDju1fib6fQI" data-title="拒绝死亡的生产系统" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -557,9 +627,9 @@
     </a>
   
   
-    <a href="/2026/02/11/2026-02-11_production-monitoring_en/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2026/02/11/2026-02-11_production-monitoring_zh/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</div>
+      <div class="article-nav-title">监控系统会死在哪里：构建真正有效的生产控制系统</div>
     </a>
   
 </nav>
@@ -626,15 +696,15 @@
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
-          </li>
-        
-          <li>
             <a href="/2026/02/11/2026-02-11_production-monitoring_zh/">监控系统会死在哪里：构建真正有效的生产控制系统</a>
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_ai-writing-modeling_en/">In the AI Era, Writing Is No Longer Expression, But Modeling</a>
+            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/11/2026-02-11_ai-writing-modeling_zh/">AI时代，写作不再是表达，而是建模</a>
           </li>
         
       </ul>
@@ -684,5 +754,6 @@
 
 
   </div>
-</body>
+<!-- hexo injector body_end start --><script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({ startOnLoad: true, theme: "default" });</script><!-- hexo injector body_end end --></body>
 </html>
