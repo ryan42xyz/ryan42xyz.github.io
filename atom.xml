@@ -31,20 +31,20 @@
     <content type="html"><![CDATA[<p>投资的本质不是寻找最高收益，而是在结构性约束下构建可持续复利系统。 一、引子：一个极度反直觉的建议 巴菲特留下过一个非常简单的遗嘱配置： 90% 标普500指数基金 10% 美国短期国债 这句话经常被引用，但很少被真正理解。 真正值得思考的不是： 为什么标普好？ 而是： 为什么一个一生都在主动投资的人，最终却给后代留下一个极度被动、甚至有些&quot;无聊&quot;的方案？ 如果主动投资真的长期更优，为什么不把家人的未来交给主动策略？ 如果市场可以持续被战胜，为什么不配置顶级基金经理？ 这个悖论背后，其实指向一个更本质的问题：…</p>]]></content>
   </entry>
   <entry>
-    <title>复利只属于幸存者</title>
-    <link href="https://ryan42xyz.github.io/2026/02/12/2026-02-12_compound-interest-only-belongs-to-survivors_zh/"/>
-    <id>https://ryan42xyz.github.io/2026/02/12/2026-02-12_compound-interest-only-belongs-to-survivors_zh/</id>
-    <updated>2026-02-12T07:22:35.444Z</updated>
-    <published>2026-02-12T07:19:00.000Z</published>
-    <content type="html"><![CDATA[<p>大多数投资者问错了问题。他们优化回报率。但复利只属于那些能够存活足够长时间以产生复利的系统。 为什么大多数投资问题都是错的 “我现在应该买黄金吗？” “今年我应该期望多少回报？” “现在最好的投资是什么？” 这些问题听起来很合理。这是每个人都会问的。但它们建立在一个隐藏的假设之上，这个假设使它们完全偏离了重点。 这个假设：投资是关于最大化回报的。 这是错的。 真正的问题不是&quot;我能赚多少？“而是&quot;我如何在几十年中存活下来并持续增长？”…</p>]]></content>
-  </entry>
-  <entry>
     <title>Compound Interest Only Belongs to Survivors</title>
     <link href="https://ryan42xyz.github.io/2026/02/12/2026-02-12_compound-interest-only-belongs-to-survivors_en/"/>
     <id>https://ryan42xyz.github.io/2026/02/12/2026-02-12_compound-interest-only-belongs-to-survivors_en/</id>
     <updated>2026-02-12T07:22:23.428Z</updated>
     <published>2026-02-12T07:19:00.000Z</published>
     <content type="html"><![CDATA[<p>Most investors ask the wrong question. They optimize for returns. But compound interest only belongs to systems that remain alive long enough to compound. Why Most Investment Questions Are Wrong “Should I buy gold now?” “How much return should I expect this year?” “What’s the…</p>]]></content>
+  </entry>
+  <entry>
+    <title>复利只属于幸存者</title>
+    <link href="https://ryan42xyz.github.io/2026/02/12/2026-02-12_compound-interest-only-belongs-to-survivors_zh/"/>
+    <id>https://ryan42xyz.github.io/2026/02/12/2026-02-12_compound-interest-only-belongs-to-survivors_zh/</id>
+    <updated>2026-02-12T07:22:35.444Z</updated>
+    <published>2026-02-12T07:19:00.000Z</published>
+    <content type="html"><![CDATA[<p>大多数投资者问错了问题。他们优化回报率。但复利只属于那些能够存活足够长时间以产生复利的系统。 为什么大多数投资问题都是错的 “我现在应该买黄金吗？” “今年我应该期望多少回报？” “现在最好的投资是什么？” 这些问题听起来很合理。这是每个人都会问的。但它们建立在一个隐藏的假设之上，这个假设使它们完全偏离了重点。 这个假设：投资是关于最大化回报的。 这是错的。 真正的问题不是&quot;我能赚多少？“而是&quot;我如何在几十年中存活下来并持续增长？”…</p>]]></content>
   </entry>
   <entry>
     <title>When Execution Becomes Cheap: A First-Principles Reconstruction of Professional Value in the AI Era</title>
@@ -79,14 +79,6 @@
     <content type="html"><![CDATA[<p>生产系统首先是生存系统 从第一性上，我们一直说生产环境生产环境，本质是什么？ Demo 系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统的目标是运行。生产系统的目标是存活。 当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。 生产系统的第一目标不是服务用户。而是避免自我毁灭。 这不是哲学空谈。这是当你凌晨3点被叫醒，因为一次部署让整个公司宕机时的感受。当区域故障意味着你的业务停止存在时。当你意识到一个配置错误可以摧毁你构建的一切时。…</p>]]></content>
   </entry>
   <entry>
-    <title>监控系统会死在哪里：构建真正有效的生产控制系统</title>
-    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/"/>
-    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/</id>
-    <updated>2026-02-12T07:19:56.588Z</updated>
-    <published>2026-02-11T09:01:31.000Z</published>
-    <content type="html"><![CDATA[<p>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。Memory 正常。Error rate 接近 0。 系统看上去一切健康。 02:25。更多客户报告超时。业务负责人进入会议：…</p>]]></content>
-  </entry>
-  <entry>
     <title>Where Monitoring Systems Die: Building Truly Effective Production Control Systems</title>
     <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_en/"/>
     <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_en/</id>
@@ -95,14 +87,12 @@
     <content type="html"><![CDATA[<p>When dashboards are all green but users are already down, you’re not facing an observability problem. You’re facing a control system failure. This is not a monitoring primer. This is a design review: why production organizations lose visibility when they need it most. Part 0:…</p>]]></content>
   </entry>
   <entry>
-    <title>In the AI Era, Writing Is No Longer Expression, But Modeling</title>
-    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/"/>
-    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/</id>
+    <title>监控系统会死在哪里：构建真正有效的生产控制系统</title>
+    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/"/>
+    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/</id>
     <updated>2026-02-12T07:19:56.588Z</updated>
-    <published>2026-02-11T08:22:42.000Z</published>
-    <content type="html"><![CDATA[<h2 id="Question-If-AI-Can-Write-Blogs-Why-Write-Yourself">Question: If AI Can Write Blogs, Why Write Yourself?</h2>
-<p>AI can write well. Give it a topic, and it can generate articles with clear structure, smooth logic, and even good prose. So why write yourself?</p>
-<p>The answer depends on your objective function.</p>]]></content>
+    <published>2026-02-11T09:01:31.000Z</published>
+    <content type="html"><![CDATA[<p>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。Memory 正常。Error rate 接近 0。 系统看上去一切健康。 02:25。更多客户报告超时。业务负责人进入会议：…</p>]]></content>
   </entry>
   <entry>
     <title>AI时代，写作不再是表达，而是建模</title>
@@ -113,5 +103,15 @@
     <content type="html"><![CDATA[<h2 id="问题：AI-能写博客，为什么还要自己写？">问题：AI 能写博客，为什么还要自己写？</h2>
 <p>AI 能写得很好。给它一个主题，它能生成结构清晰、逻辑顺畅、甚至文采不错的文章。那为什么还要自己写？</p>
 <p>答案取决于你的目标函数。</p>]]></content>
+  </entry>
+  <entry>
+    <title>In the AI Era, Writing Is No Longer Expression, But Modeling</title>
+    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/"/>
+    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/</id>
+    <updated>2026-02-12T07:19:56.588Z</updated>
+    <published>2026-02-11T08:22:42.000Z</published>
+    <content type="html"><![CDATA[<h2 id="Question-If-AI-Can-Write-Blogs-Why-Write-Yourself">Question: If AI Can Write Blogs, Why Write Yourself?</h2>
+<p>AI can write well. Give it a topic, and it can generate articles with clear structure, smooth logic, and even good prose. So why write yourself?</p>
+<p>The answer depends on your objective function.</p>]]></content>
   </entry>
 </feed>
