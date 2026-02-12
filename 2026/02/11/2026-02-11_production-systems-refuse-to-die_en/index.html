@@ -41,7 +41,36 @@
   
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end start --><style>
+.article-toc-wrap {
+  margin-bottom: 1.5em;
+  padding: 1em 1.25em;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #ddd;
+}
+.article-toc-wrap .toc-title {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  font-size: 0.95em;
+  color: #555;
+}
+.article-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.article-toc-list .article-toc-list { padding-left: 1em; margin-top: 0.25em; }
+.article-toc-item { margin: 0.35em 0; }
+.article-toc-link {
+  text-decoration: none;
+  color: #444;
+  font-size: 0.9em;
+}
+.article-toc-link:hover { color: #08c; text-decoration: underline; }
+.article-toc-level-3 .article-toc-link { font-size: 0.85em; }
+.article-toc-level-4 .article-toc-link { font-size: 0.8em; }
+</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -109,7 +138,8 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="Production-Systems-Are-First-Survival-Systems">Production Systems Are First Survival Systems</h2>
+        <nav class="article-toc-wrap" aria-label="Contents"><div class="toc-title">Contents</div><ol class="article-toc-list"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Production-Systems-Are-First-Survival-Systems"><span class="article-toc-text">Production Systems Are First Survival Systems</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Single-Cluster-Failure-Domains"><span class="article-toc-text">Single-Cluster Failure Domains</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Why-Survival-Systems-Converge-to-Multi-Cluster"><span class="article-toc-text">Why Survival Systems Converge to Multi-Cluster</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#HA-Scaling-Isolation-Three-Responses-to-Three-Failure-Modes"><span class="article-toc-text">HA, Scaling, Isolation: Three Responses to Three Failure Modes</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#HA-Multi-Cluster-Surviving-External-Failures"><span class="article-toc-text">HA Multi-Cluster: Surviving External Failures</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Scaling-Multi-Cluster-Surviving-During-Growth"><span class="article-toc-text">Scaling Multi-Cluster: Surviving During Growth</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Isolation-Multi-Cluster-Surviving-from-Self"><span class="article-toc-text">Isolation Multi-Cluster: Surviving from Self</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Why-Active-Active-Retreats-The-State-Ambiguity-Problem"><span class="article-toc-text">Why Active-Active Retreats: The State Ambiguity Problem</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#State-Ambiguity-as-Cognitive-Load"><span class="article-toc-text">State Ambiguity as Cognitive Load</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Operability-Spectrum"><span class="article-toc-text">Operability Spectrum</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Active-Passive-Isolation-Restoring-Human-Operability"><span class="article-toc-text">Active-Passive + Isolation: Restoring Human Operability</span></a></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Architectures-for-Survival"><span class="article-toc-text">Architectures for Survival</span></a></li></ol></nav>
+<h2 id="Production-Systems-Are-First-Survival-Systems">Production Systems Are First Survival Systems</h2>
 <p>From first principles, we’ve been saying “production environment, production environment”—what is the essence?</p>
 <p>Demo systems optimize for success. Production systems optimize for survival.</p>
 <p>These are completely different species.</p>
@@ -605,7 +635,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-systems-refuse-to-die_en/" data-id="cuidL7V1EDhox0qaxyfII0A2Z" data-title="Production Systems That Refuse to Die" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-systems-refuse-to-die_en/" data-id="cuidmeqBucvRDR18otdgfC43G" data-title="Production Systems That Refuse to Die" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -687,11 +717,11 @@
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
+            <a href="/2026/02/11/2026-02-11_production-monitoring_zh/">监控系统会死在哪里：构建真正有效的生产控制系统</a>
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_production-monitoring_zh/">监控系统会死在哪里：构建真正有效的生产控制系统</a>
+            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
           </li>
         
           <li>

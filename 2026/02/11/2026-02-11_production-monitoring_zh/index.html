@@ -14,7 +14,7 @@
 <meta property="og:description" content="当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-11T09:01:31.000Z">
-<meta property="article:modified_time" content="2026-02-12T05:14:33.364Z">
+<meta property="article:modified_time" content="2026-02-12T06:04:43.219Z">
 <meta property="article:author" content="Rui Shao">
 <meta property="article:tag" content="SRE">
 <meta property="article:tag" content="可观测性">
@@ -40,7 +40,36 @@
   
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end start --><style>
+.article-toc-wrap {
+  margin-bottom: 1.5em;
+  padding: 1em 1.25em;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #ddd;
+}
+.article-toc-wrap .toc-title {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  font-size: 0.95em;
+  color: #555;
+}
+.article-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.article-toc-list .article-toc-list { padding-left: 1em; margin-top: 0.25em; }
+.article-toc-item { margin: 0.35em 0; }
+.article-toc-link {
+  text-decoration: none;
+  color: #444;
+  font-size: 0.9em;
+}
+.article-toc-link:hover { color: #08c; text-decoration: underline; }
+.article-toc-level-3 .article-toc-link { font-size: 0.85em; }
+.article-toc-level-4 .article-toc-link { font-size: 0.8em; }
+</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -108,7 +137,8 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p><strong>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。</strong></p>
+        <nav class="article-toc-wrap" aria-label="文章目录"><div class="toc-title">文章目录</div><ol class="article-toc-list"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-0-%E6%94%B9%E5%8F%98%E4%B8%80%E5%88%87%E7%9A%84%E4%BA%8B%E6%95%85"><span class="article-toc-text">Part 0: 改变一切的事故</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9C%BA%E6%99%AF"><span class="article-toc-text">场景</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%B4%A9%E5%A1%8C"><span class="article-toc-text">崩塌</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E8%AE%A4%E7%9F%A5"><span class="article-toc-text">认知</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E9%97%AE%E9%A2%98"><span class="article-toc-text">问题</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-1-%E4%B8%BA%E4%BB%80%E4%B9%88-90-%E7%9A%84%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E6%B2%A1%E6%9C%89%E4%BB%B7%E5%80%BC"><span class="article-toc-text">Part 1: 为什么 90% 的监控系统没有价值</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9B%9E%E5%88%B0-02-17"><span class="article-toc-text">回到 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%BB%B7%E5%80%BC%E7%AD%89%E5%BC%8F"><span class="article-toc-text">价值等式</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88-CPU-90-%E4%B8%8D%E4%BB%A3%E8%A1%A8%E9%A3%8E%E9%99%A9"><span class="article-toc-text">为什么 CPU 90% 不代表风险</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%BF%A1%E5%99%AA%E6%AF%94"><span class="article-toc-text">信噪比</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%86%B3%E7%AD%96%E5%BB%B6%E8%BF%9F"><span class="article-toc-text">决策延迟</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E7%9C%9F%E6%AD%A3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="article-toc-text">真正的问题</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-2-%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F%E6%98%AF%E5%AE%89%E5%85%A8%E7%B3%BB%E7%BB%9F"><span class="article-toc-text">Part 2: 监控系统是安全系统</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9B%9E%E5%88%B0-02-17-2"><span class="article-toc-text">回到 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%AE%89%E5%85%A8%EF%BC%8C%E8%80%8C%E9%9D%9E%E8%A7%82%E5%AF%9F"><span class="article-toc-text">安全，而非观察</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%8E%A7%E5%88%B6%E5%BE%AA%E7%8E%AF"><span class="article-toc-text">控制循环</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%8E%A7%E5%88%B6%E7%90%86%E8%AE%BA%E9%97%AE%E9%A2%98"><span class="article-toc-text">控制理论问题</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98"><span class="article-toc-text">安全问题</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-3-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%8D%E4%BC%9A%E4%B8%8E%E7%94%9F%E4%BA%A7%E4%B8%80%E8%B5%B7%E6%AD%BB%E7%9A%84%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F"><span class="article-toc-text">Part 3: 如何设计不会与生产一起死的监控系统</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9B%9E%E5%88%B0-02-17-3"><span class="article-toc-text">回到 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E7%94%9F%E5%AD%98%E8%83%BD%E5%8A%9B%E6%98%AF%E7%AC%AC%E4%B8%80%E6%80%A7%E5%8E%9F%E7%90%86"><span class="article-toc-text">生存能力是第一性原理</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E7%94%9F%E5%AD%98%E8%83%BD%E5%8A%9B%E5%B1%82%E7%BA%A7"><span class="article-toc-text">生存能力层级</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9F%BA%E6%95%B0%E9%97%AE%E9%A2%98"><span class="article-toc-text">基数问题</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%85%83%E7%9B%91%E6%8E%A7"><span class="article-toc-text">元监控</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-4-%E5%8F%AF%E8%A7%82%E6%B5%8B%E6%80%A7%E5%AD%98%E5%82%A8%E6%98%AF%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0"><span class="article-toc-text">Part 4: 可观测性存储是数据平台</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9B%9E%E5%88%B0-02-17-4"><span class="article-toc-text">回到 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%A0%B8%E5%BF%83%E6%98%AF%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%8C%E4%B8%8D%E6%98%AF-Grafana"><span class="article-toc-text">核心是数据库，不是 Grafana</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9F%BA%E6%95%B0%E7%88%86%E7%82%B8"><span class="article-toc-text">基数爆炸</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%AD%98%E5%82%A8%E5%88%86%E5%B1%82"><span class="article-toc-text">存储分层</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%9F%A5%E8%AF%A2%E6%80%A7%E8%83%BD"><span class="article-toc-text">查询性能</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-5-%E4%BB%8E-CPU-%E5%88%B0%E6%94%B6%E5%85%A5%EF%BC%9A%E7%9B%91%E6%8E%A7%E5%B1%82%E7%BA%A7%E8%B7%83%E8%BF%81"><span class="article-toc-text">Part 5: 从 CPU 到收入：监控层级跃迁</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9B%9E%E5%88%B0-02-17-5"><span class="article-toc-text">回到 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%B1%82%E7%BA%A7%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84"><span class="article-toc-text">层级层次结构</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9F%BA%E7%A1%80%E8%AE%BE%E6%96%BD%E6%8C%87%E6%A0%87%E6%98%AF%E4%BD%8E%E5%B1%82%E7%BA%A7%E4%BF%A1%E5%8F%B7"><span class="article-toc-text">基础设施指标是低层级信号</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E8%AE%A4%E7%9F%A5%E6%A0%88"><span class="article-toc-text">认知栈</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%AF%8F%E5%AE%A2%E6%88%B7-SLO"><span class="article-toc-text">每客户 SLO</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%BB%B7%E5%80%BC%E6%B5%81"><span class="article-toc-text">价值流</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-6-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E6%94%AF%E6%8C%81%E5%86%B3%E7%AD%96%E7%9A%84%E4%BB%AA%E8%A1%A8%E7%9B%98"><span class="article-toc-text">Part 6: 如何设计支持决策的仪表盘</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9B%9E%E5%88%B0-02-17-6"><span class="article-toc-text">回到 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%BB%AA%E8%A1%A8%E7%9B%98%E9%97%AE%E9%A2%98"><span class="article-toc-text">仪表盘问题</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%88%98%E6%9C%AF-vs-%E6%8E%A2%E7%B4%A2"><span class="article-toc-text">战术 vs 探索</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%86%B3%E7%AD%96%E5%BB%B6%E8%BF%9F-2"><span class="article-toc-text">决策延迟</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%94%AF%E6%8C%81%E5%86%B3%E7%AD%96%E7%9A%84%E4%BB%AA%E8%A1%A8%E7%9B%98%E6%98%BE%E7%A4%BA%E4%BB%80%E4%B9%88"><span class="article-toc-text">支持决策的仪表盘显示什么</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%BB%AA%E8%A1%A8%E7%9B%98%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="article-toc-text">仪表盘设计原则</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-7-%E4%B8%BA%E4%BB%80%E4%B9%88%E5%A4%A7%E5%A4%9A%E6%95%B0%E4%BB%AA%E8%A1%A8%E7%9B%98%E6%B2%A1%E4%BA%BA%E7%9C%8B"><span class="article-toc-text">Part 7: 为什么大多数仪表盘没人看</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9B%9E%E5%88%B0-02-17-7"><span class="article-toc-text">回到 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%BF%A1%E4%BB%BB%E5%B4%A9%E5%A1%8C"><span class="article-toc-text">信任崩塌</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%BF%A1%E4%BB%BB%E5%B7%A5%E7%A8%8B"><span class="article-toc-text">信任工程</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%89%80%E6%9C%89%E6%9D%83%E6%A8%A1%E5%9E%8B"><span class="article-toc-text">所有权模型</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E5%B7%A5%E7%A8%8B%E5%B8%88%E7%BB%95%E8%BF%87"><span class="article-toc-text">为什么工程师绕过</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-8-%E9%A3%8E%E9%99%A9%E9%A9%B1%E5%8A%A8%E7%9A%84%E7%9B%91%E6%8E%A7%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%89"><span class="article-toc-text">Part 8: 风险驱动的监控（核心）</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9B%9E%E5%88%B0-02-17-8"><span class="article-toc-text">回到 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E9%A3%8E%E9%99%A9%E6%98%A0%E5%B0%84"><span class="article-toc-text">风险映射</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E9%A3%8E%E9%99%A9%E9%97%AE%E9%A2%98"><span class="article-toc-text">风险问题</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%AD%BB%E4%BA%A1%E6%A8%A1%E5%BC%8F%E6%A0%B9%E6%9C%AC%E5%8E%9F%E5%9B%A0"><span class="article-toc-text">死亡模式根本原因</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E9%A3%8E%E9%99%A9%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1"><span class="article-toc-text">风险驱动设计</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-9-%E6%80%BB%E7%BB%93%EF%BC%9A%E5%AE%83%E4%BC%9A%E6%AD%BB%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="article-toc-text">Part 9: 总结：它会死在哪里？</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%9B%9E%E5%88%B0-02-17-9"><span class="article-toc-text">回到 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%85%AD%E7%A7%8D%E6%AD%BB%E4%BA%A1%E6%A8%A1%E5%BC%8F"><span class="article-toc-text">六种死亡模式</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E9%A2%84%E9%98%B2%E6%A1%86%E6%9E%B6"><span class="article-toc-text">预防框架</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E7%BB%9F%E4%B8%80%E6%A8%A1%E5%9E%8B"><span class="article-toc-text">统一模型</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8E%9F%E5%88%99"><span class="article-toc-text">核心原则</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#%E5%AE%83%E4%BC%9A%E6%AD%BB%E5%9C%A8%E5%93%AA%E9%87%8C%EF%BC%9F"><span class="article-toc-text">它会死在哪里？</span></a></li></ol></li></ol></nav>
+<p><strong>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。</strong></p>
 <p>这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。</p>
 <h2 id="Part-0-改变一切的事故">Part 0: 改变一切的事故</h2>
 <h3 id="场景">场景</h3>
@@ -182,12 +212,12 @@
 <p>原始指标不会告诉你风险。它们告诉你状态。风险需要解释。</p>
 <p>在我们的事故中，CPU 正常。但用户宕机了。指标没有错。它只是没有测量正确的东西。</p>
 <h3 id="信噪比">信噪比</h3>
-<p>在 02:25，我们有太多噪音（基础设施指标）和不够的信号（用户影响）。<strong>信噪比</strong>是倒置的。</p>
+<p>在 02:25，我们有太多噪音（基础设施指标）和不够的信号（用户影响）。信噪比是倒置的。</p>
 <p>更多数据 → 更低信噪比 → 最终没人看。</p>
 <p>我们收集一切。我们对一切告警。最终，没人看。</p>
 <p>解决方案不是更多数据。而是更少噪音。主动减少信号。过滤。分组。提高置信度阈值。移除低价值指标。</p>
 <h3 id="决策延迟">决策延迟</h3>
-<p>行动能力的主要代理指标是 <strong>决策延迟</strong>：从信号到行动决策的时间。</p>
+<p>行动能力的主要代理指标是<strong>决策延迟</strong>：从信号到行动决策的时间。</p>
 <p>在我们的事故中，决策延迟是无限的。我们有信号（CPU、内存）。但我们无法做出决策（回滚？扩容？等待？）。</p>
 <p>一个好的监控系统减少决策延迟。它不只是显示数据。它支持快速、正确的决策。</p>
 <p><strong>目标</strong>：关键事故 &lt; 5 分钟。</p>
@@ -214,7 +244,7 @@
 <p>在 02:25，我们有原始指标（CPU、内存）。但我们没有安全信号（用户安全吗？风险在扩大吗？）。</p>
 <h3 id="控制循环">控制循环</h3>
 <p>监控是反馈控制系统。不是被动观察。</p>
-<p><strong>控制循环</strong>：现实 → 信号 → 解释 → <strong>风险框架</strong> → 决策 → 行动 → 系统变化 → 新现实。</p>
+<p><strong>控制循环</strong>：现实 → 信号 → 解释 → 风险框架 → 决策 → 行动 → 系统变化 → 新现实。</p>
 <p>如果任何环节断裂，监控就变成观察噪音。</p>
 <p><strong>为什么需要这个图表</strong>：控制循环揭示了监控系统的本质是反馈控制，而非被动观察。每个环节的断裂都会导致系统失效，这个循环图帮助理解为什么&quot;有数据但无法决策&quot;。</p>
 <div class="mermaid">graph LR
@@ -262,12 +292,12 @@
 <p>如果 Prometheus 崩溃了，我们将完全失明。</p>
 <p>与生产一起死的监控系统是无用的。</p>
 <h3 id="生存能力是第一性原理">生存能力是第一性原理</h3>
-<p>监控系统 = 关键基础设施。<strong>生存能力</strong>必须匹配系统关键性——监控必须比被监控对象更稳定。它必须比它监控的东西更稳定。不是同样稳定。更稳定。</p>
+<p>监控系统 = 关键基础设施。它必须比它监控的东西更稳定。不是同样稳定。更稳定。</p>
 <p>我们特别需要在生产有问题时进行监控。如果监控本身不稳定，我们在最需要视力时失明。</p>
 <p>在我们的事故中，监控几乎失败。Prometheus 不稳定。查询很慢。仪表盘不可用。我们距离完全失明只差一次 Prometheus 崩溃。</p>
 <h3 id="生存能力层级">生存能力层级</h3>
 <p>在 02:50，Prometheus 查询 OOM。如果 Prometheus 崩溃，我们将失明。</p>
-<p><strong>生存能力</strong>是频谱。不是二进制。</p>
+<p>生存能力是频谱。不是二进制。</p>
 <p><strong>层级 0：与应用耦合</strong></p>
 <p>监控运行在与应用相同的基础设施上。应用崩溃，监控崩溃。零成本。开发环境可以。事故时无用。</p>
 <p><strong>层级 1：独立计算/存储</strong></p>
@@ -730,7 +760,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/" data-id="cuid38neE-3LH6s6R0i4XqXb5" data-title="监控系统会死在哪里：构建真正有效的生产控制系统" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/" data-id="cuidSC3Q78fPRVzWlrWER1Sr7" data-title="监控系统会死在哪里：构建真正有效的生产控制系统" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -742,19 +772,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2026/02/11/2026-02-11_production-monitoring_en/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Where Monitoring Systems Die: Building Truly Effective Production Control Systems
+          拒绝死亡的生产系统
         
       </div>
     </a>
   
   
-    <a href="/2026/02/11/2026-02-11_ai-writing-modeling_en/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2026/02/11/2026-02-11_production-monitoring_en/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">In the AI Era, Writing Is No Longer Expression, But Modeling</div>
+      <div class="article-nav-title">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</div>
     </a>
   
 </nav>
@@ -821,11 +851,11 @@
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
+            <a href="/2026/02/11/2026-02-11_production-monitoring_zh/">监控系统会死在哪里：构建真正有效的生产控制系统</a>
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_production-monitoring_zh/">监控系统会死在哪里：构建真正有效的生产控制系统</a>
+            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
           </li>
         
           <li>

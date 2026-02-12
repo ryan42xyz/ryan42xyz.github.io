@@ -18,9 +18,17 @@
     <title>拒绝死亡的生产系统</title>
     <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/"/>
     <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/</id>
-    <updated>2026-02-11T11:04:22.467Z</updated>
+    <updated>2026-02-12T06:04:43.189Z</updated>
     <published>2026-02-11T10:47:32.000Z</published>
     <content type="html"><![CDATA[<p>生产系统首先是生存系统 从第一性上，我们一直说生产环境生产环境，本质是什么？ Demo 系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统的目标是运行。生产系统的目标是存活。 当系统的长期故障对组织变得不可接受时——当停机不再是战略上可容忍的，而成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。此时，一切都变了。 生产系统的第一目标不是服务用户。而是避免自我毁灭。 这不是哲学空谈。这是当你凌晨3点被叫醒，因为一次部署让整个公司宕机时的感受。当区域故障意味着你的业务停止存在时。当你意识到一个配置错误可以摧毁你构建的一切时。…</p>]]></content>
+  </entry>
+  <entry>
+    <title>监控系统会死在哪里：构建真正有效的生产控制系统</title>
+    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/"/>
+    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/</id>
+    <updated>2026-02-12T06:04:43.219Z</updated>
+    <published>2026-02-11T09:01:31.000Z</published>
+    <content type="html"><![CDATA[<p>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。Memory 正常。Error rate 接近 0。 系统看上去一切健康。 02:25。更多客户报告超时。业务负责人进入会议：…</p>]]></content>
   </entry>
   <entry>
     <title>Where Monitoring Systems Die: Building Truly Effective Production Control Systems</title>
@@ -31,18 +39,10 @@
     <content type="html"><![CDATA[<p>When dashboards are all green but users are already down, you’re not facing an observability problem. You’re facing a control system failure. This is not a monitoring primer. This is a design review: why production organizations lose visibility when they need it most. Part 0:…</p>]]></content>
   </entry>
   <entry>
-    <title>监控系统会死在哪里：构建真正有效的生产控制系统</title>
-    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/"/>
-    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/</id>
-    <updated>2026-02-12T05:14:33.364Z</updated>
-    <published>2026-02-11T09:01:31.000Z</published>
-    <content type="html"><![CDATA[<p>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。Memory 正常。Error rate 接近 0。 系统看上去一切健康。 02:25。更多客户报告超时。业务负责人进入会议：…</p>]]></content>
-  </entry>
-  <entry>
     <title>In the AI Era, Writing Is No Longer Expression, But Modeling</title>
     <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/"/>
     <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/</id>
-    <updated>2026-02-11T11:07:49.610Z</updated>
+    <updated>2026-02-12T06:04:43.304Z</updated>
     <published>2026-02-11T08:22:42.000Z</published>
     <content type="html"><![CDATA[<h2 id="Question-If-AI-Can-Write-Blogs-Why-Write-Yourself">Question: If AI Can Write Blogs, Why Write Yourself?</h2>
 <p>AI can write well. Give it a topic, and it can generate articles with clear structure, smooth logic, and even good prose. So why write yourself?</p>
@@ -52,7 +52,7 @@
     <title>AI时代，写作不再是表达，而是建模</title>
     <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_zh/"/>
     <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_zh/</id>
-    <updated>2026-02-12T05:14:13.940Z</updated>
+    <updated>2026-02-12T05:23:16.437Z</updated>
     <published>2026-02-11T08:22:42.000Z</published>
     <content type="html"><![CDATA[<h2 id="问题：AI-能写博客，为什么还要自己写？">问题：AI 能写博客，为什么还要自己写？</h2>
 <p>AI 能写得很好。给它一个主题，它能生成结构清晰、逻辑顺畅、甚至文采不错的文章。那为什么还要自己写？</p>

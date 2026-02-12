@@ -40,7 +40,36 @@
   
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
 
-<meta name="generator" content="Hexo 8.1.1"></head>
+<!-- hexo injector head_end start --><style>
+.article-toc-wrap {
+  margin-bottom: 1.5em;
+  padding: 1em 1.25em;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 3px solid #ddd;
+}
+.article-toc-wrap .toc-title {
+  font-weight: bold;
+  margin-bottom: 0.5em;
+  font-size: 0.95em;
+  color: #555;
+}
+.article-toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.article-toc-list .article-toc-list { padding-left: 1em; margin-top: 0.25em; }
+.article-toc-item { margin: 0.35em 0; }
+.article-toc-link {
+  text-decoration: none;
+  color: #444;
+  font-size: 0.9em;
+}
+.article-toc-link:hover { color: #08c; text-decoration: underline; }
+.article-toc-level-3 .article-toc-link { font-size: 0.85em; }
+.article-toc-level-4 .article-toc-link { font-size: 0.8em; }
+</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.1"></head>
 
 <body>
   <div id="container">
@@ -108,7 +137,8 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p><strong>When dashboards are all green but users are already down, you’re not facing an observability problem. You’re facing a control system failure.</strong></p>
+        <nav class="article-toc-wrap" aria-label="Contents"><div class="toc-title">Contents</div><ol class="article-toc-list"><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-0-The-Incident-That-Changed-Everything"><span class="article-toc-text">Part 0: The Incident That Changed Everything</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#The-Scene"><span class="article-toc-text">The Scene</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#The-Collapse"><span class="article-toc-text">The Collapse</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#The-Realization"><span class="article-toc-text">The Realization</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#The-Question"><span class="article-toc-text">The Question</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-1-Why-90-of-Monitoring-Systems-Have-No-Value"><span class="article-toc-text">Part 1: Why 90% of Monitoring Systems Have No Value</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Back-to-02-17"><span class="article-toc-text">Back to 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#The-Value-Equation"><span class="article-toc-text">The Value Equation</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Why-CPU-90-Doesn%E2%80%99t-Mean-Risk"><span class="article-toc-text">Why CPU 90% Doesn’t Mean Risk</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Signal-to-Noise-Ratio"><span class="article-toc-text">Signal-to-Noise Ratio</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Decision-Latency"><span class="article-toc-text">Decision Latency</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#The-Real-Problem"><span class="article-toc-text">The Real Problem</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-2-Monitoring-Systems-Are-Safety-Systems"><span class="article-toc-text">Part 2: Monitoring Systems Are Safety Systems</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Back-to-02-17-2"><span class="article-toc-text">Back to 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Safety-Not-Observation"><span class="article-toc-text">Safety, Not Observation</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Control-Loop"><span class="article-toc-text">Control Loop</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Control-Theory-Problems"><span class="article-toc-text">Control Theory Problems</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Safety-Questions"><span class="article-toc-text">Safety Questions</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-3-How-to-Design-Monitoring-Systems-That-Don%E2%80%99t-Die-with-Production"><span class="article-toc-text">Part 3: How to Design Monitoring Systems That Don’t Die with Production</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Back-to-02-17-3"><span class="article-toc-text">Back to 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Survivability-Is-First-Principle"><span class="article-toc-text">Survivability Is First Principle</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Survivability-Levels"><span class="article-toc-text">Survivability Levels</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Cardinality-Problem"><span class="article-toc-text">Cardinality Problem</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Meta-Monitoring"><span class="article-toc-text">Meta-Monitoring</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-4-Observability-Storage-Is-a-Data-Platform"><span class="article-toc-text">Part 4: Observability Storage Is a Data Platform</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Back-to-02-17-4"><span class="article-toc-text">Back to 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Core-Is-Database-Not-Grafana"><span class="article-toc-text">Core Is Database, Not Grafana</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Cardinality-Explosion"><span class="article-toc-text">Cardinality Explosion</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Storage-Tiering"><span class="article-toc-text">Storage Tiering</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Query-Performance"><span class="article-toc-text">Query Performance</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-5-From-CPU-to-Revenue-Monitoring-Layer-Transitions"><span class="article-toc-text">Part 5: From CPU to Revenue: Monitoring Layer Transitions</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Back-to-02-17-5"><span class="article-toc-text">Back to 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Layer-Hierarchy"><span class="article-toc-text">Layer Hierarchy</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Infrastructure-Metrics-Are-Low-Level-Signals"><span class="article-toc-text">Infrastructure Metrics Are Low-Level Signals</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Cognitive-Stack"><span class="article-toc-text">Cognitive Stack</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Per-Customer-SLO"><span class="article-toc-text">Per-Customer SLO</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Value-Stream"><span class="article-toc-text">Value Stream</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-6-How-to-Design-Decision-Supporting-Dashboards"><span class="article-toc-text">Part 6: How to Design Decision-Supporting Dashboards</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Back-to-02-17-6"><span class="article-toc-text">Back to 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Dashboard-Questions"><span class="article-toc-text">Dashboard Questions</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Tactical-vs-Exploratory"><span class="article-toc-text">Tactical vs Exploratory</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Decision-Latency-2"><span class="article-toc-text">Decision Latency</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#What-Decision-Supporting-Dashboards-Show"><span class="article-toc-text">What Decision-Supporting Dashboards Show</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Dashboard-Design-Principles"><span class="article-toc-text">Dashboard Design Principles</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-7-Why-Most-Dashboards-Are-Unwatched"><span class="article-toc-text">Part 7: Why Most Dashboards Are Unwatched</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Back-to-02-17-7"><span class="article-toc-text">Back to 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Trust-Collapse"><span class="article-toc-text">Trust Collapse</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Trust-Engineering"><span class="article-toc-text">Trust Engineering</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Ownership-Models"><span class="article-toc-text">Ownership Models</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Why-Engineers-Bypass"><span class="article-toc-text">Why Engineers Bypass</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-8-Risk-Driven-Monitoring-Core"><span class="article-toc-text">Part 8: Risk-Driven Monitoring (Core)</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Back-to-02-17-8"><span class="article-toc-text">Back to 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Risk-Mapping"><span class="article-toc-text">Risk Mapping</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Risk-Questions"><span class="article-toc-text">Risk Questions</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Death-Mode-Root-Causes"><span class="article-toc-text">Death Mode Root Causes</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Risk-Driven-Design"><span class="article-toc-text">Risk-Driven Design</span></a></li></ol></li><li class="article-toc-item article-toc-level-2"><a class="article-toc-link" href="#Part-9-Summary-Where-Will-It-Die"><span class="article-toc-text">Part 9: Summary: Where Will It Die?</span></a><ol class="article-toc-child"><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Back-to-02-17-9"><span class="article-toc-text">Back to 02:17</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Six-Death-Modes"><span class="article-toc-text">Six Death Modes</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Prevention-Framework"><span class="article-toc-text">Prevention Framework</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Unified-Model"><span class="article-toc-text">Unified Model</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Core-Principle"><span class="article-toc-text">Core Principle</span></a></li><li class="article-toc-item article-toc-level-3"><a class="article-toc-link" href="#Where-Will-It-Die"><span class="article-toc-text">Where Will It Die?</span></a></li></ol></li></ol></nav>
+<p><strong>When dashboards are all green but users are already down, you’re not facing an observability problem. You’re facing a control system failure.</strong></p>
 <p>This is not a monitoring primer. This is a design review: why production organizations lose visibility when they need it most.</p>
 <h2 id="Part-0-The-Incident-That-Changed-Everything">Part 0: The Incident That Changed Everything</h2>
 <h3 id="The-Scene">The Scene</h3>
@@ -730,7 +760,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_en/" data-id="cuid5yqPxAUViaf7hrvuKOdaw" data-title="Where Monitoring Systems Die: Building Truly Effective Production Control Systems" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_en/" data-id="cuidSCCDAJSAPRV5lEB7fZ4jE" data-title="Where Monitoring Systems Die: Building Truly Effective Production Control Systems" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -742,19 +772,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2026/02/11/2026-02-11_production-systems-refuse-to-die_zh/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2026/02/11/2026-02-11_production-monitoring_zh/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          拒绝死亡的生产系统
+          监控系统会死在哪里：构建真正有效的生产控制系统
         
       </div>
     </a>
   
   
-    <a href="/2026/02/11/2026-02-11_production-monitoring_zh/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2026/02/11/2026-02-11_ai-writing-modeling_en/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">监控系统会死在哪里：构建真正有效的生产控制系统</div>
+      <div class="article-nav-title">In the AI Era, Writing Is No Longer Expression, But Modeling</div>
     </a>
   
 </nav>
@@ -821,11 +851,11 @@
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
+            <a href="/2026/02/11/2026-02-11_production-monitoring_zh/">监控系统会死在哪里：构建真正有效的生产控制系统</a>
           </li>
         
           <li>
-            <a href="/2026/02/11/2026-02-11_production-monitoring_zh/">监控系统会死在哪里：构建真正有效的生产控制系统</a>
+            <a href="/2026/02/11/2026-02-11_production-monitoring_en/">Where Monitoring Systems Die: Building Truly Effective Production Control Systems</a>
           </li>
         
           <li>
