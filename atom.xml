@@ -103,16 +103,6 @@
     <content type="html"><![CDATA[<p>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。Memory 正常。Error rate 接近 0。 系统看上去一切健康。 02:25。更多客户报告超时。业务负责人进入会议：…</p>]]></content>
   </entry>
   <entry>
-    <title>AI时代，写作不再是表达，而是建模</title>
-    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_zh/"/>
-    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_zh/</id>
-    <updated>2026-02-12T07:19:56.588Z</updated>
-    <published>2026-02-11T08:22:42.000Z</published>
-    <content type="html"><![CDATA[<h2 id="问题：AI-能写博客，为什么还要自己写？">问题：AI 能写博客，为什么还要自己写？</h2>
-<p>AI 能写得很好。给它一个主题，它能生成结构清晰、逻辑顺畅、甚至文采不错的文章。那为什么还要自己写？</p>
-<p>答案取决于你的目标函数。</p>]]></content>
-  </entry>
-  <entry>
     <title>In the AI Era, Writing Is No Longer Expression, But Modeling</title>
     <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/"/>
     <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/</id>
@@ -121,5 +111,15 @@
     <content type="html"><![CDATA[<h2 id="Question-If-AI-Can-Write-Blogs-Why-Write-Yourself">Question: If AI Can Write Blogs, Why Write Yourself?</h2>
 <p>AI can write well. Give it a topic, and it can generate articles with clear structure, smooth logic, and even good prose. So why write yourself?</p>
 <p>The answer depends on your objective function.</p>]]></content>
+  </entry>
+  <entry>
+    <title>AI时代，写作不再是表达，而是建模</title>
+    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_zh/"/>
+    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_zh/</id>
+    <updated>2026-02-12T07:19:56.588Z</updated>
+    <published>2026-02-11T08:22:42.000Z</published>
+    <content type="html"><![CDATA[<h2 id="问题：AI-能写博客，为什么还要自己写？">问题：AI 能写博客，为什么还要自己写？</h2>
+<p>AI 能写得很好。给它一个主题，它能生成结构清晰、逻辑顺畅、甚至文采不错的文章。那为什么还要自己写？</p>
+<p>答案取决于你的目标函数。</p>]]></content>
   </entry>
 </feed>
