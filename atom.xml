@@ -71,20 +71,20 @@
     <content type="html"><![CDATA[<p>把自己当公司：一个30岁技术人的资本配置审计 第一幕：时代重新定价个人 大多数人从未用投资机构的视角，审视过自己这家公司。 我们做职业规划、学习计划、人生规划，但很少有人像CFO一样审视自己的资本结构。我们用员工思维努力，却在用资本市场规则被定价。这种错配，正在AI时代被放大。 AI时代正在把个人重新定价。不再按努力，而按杠杆与资产结构。 定价机制的改变是结构性的。过去，定价基于时间投入：你工作了多少小时，你有多努力，你投入了多少时间。这是线性定价——时间 × 努力 &#x3D; 收入。…</p>]]></content>
   </entry>
   <entry>
-    <title>为什么所有长期投资逻辑，最终都会收敛到标普500</title>
-    <link href="https://ryan42xyz.github.io/2026/02/12/2026-02-12_sp500-investment-convergence_zh/"/>
-    <id>https://ryan42xyz.github.io/2026/02/12/2026-02-12_sp500-investment-convergence_zh/</id>
-    <updated>2026-02-12T08:15:13.070Z</updated>
-    <published>2026-02-12T08:12:00.000Z</published>
-    <content type="html"><![CDATA[<p>投资的本质不是寻找最高收益，而是在结构性约束下构建可持续复利系统。 一、引子：一个极度反直觉的建议 巴菲特留下过一个非常简单的遗嘱配置： 90% 标普500指数基金 10% 美国短期国债 这句话经常被引用，但很少被真正理解。 真正值得思考的不是： 为什么标普好？ 而是： 为什么一个一生都在主动投资的人，最终却给后代留下一个极度被动、甚至有些&quot;无聊&quot;的方案？ 如果主动投资真的长期更优，为什么不把家人的未来交给主动策略？ 如果市场可以持续被战胜，为什么不配置顶级基金经理？ 这个悖论背后，其实指向一个更本质的问题：…</p>]]></content>
-  </entry>
-  <entry>
     <title>Why All Long-Term Investment Logic Eventually Converges to the S&amp;P 500</title>
     <link href="https://ryan42xyz.github.io/2026/02/12/2026-02-12_sp500-investment-convergence_en/"/>
     <id>https://ryan42xyz.github.io/2026/02/12/2026-02-12_sp500-investment-convergence_en/</id>
     <updated>2026-02-12T09:47:14.816Z</updated>
     <published>2026-02-12T08:12:00.000Z</published>
     <content type="html"><![CDATA[<p>The essence of investment is not finding the highest returns, but constructing a sustainable compounding system under structural constraints. I. Opening: A Highly Counterintuitive Recommendation Buffett left a very simple will allocation: 90% S&amp;P 500 index fund 10% US…</p>]]></content>
+  </entry>
+  <entry>
+    <title>为什么所有长期投资逻辑，最终都会收敛到标普500</title>
+    <link href="https://ryan42xyz.github.io/2026/02/12/2026-02-12_sp500-investment-convergence_zh/"/>
+    <id>https://ryan42xyz.github.io/2026/02/12/2026-02-12_sp500-investment-convergence_zh/</id>
+    <updated>2026-02-12T08:15:13.070Z</updated>
+    <published>2026-02-12T08:12:00.000Z</published>
+    <content type="html"><![CDATA[<p>投资的本质不是寻找最高收益，而是在结构性约束下构建可持续复利系统。 一、引子：一个极度反直觉的建议 巴菲特留下过一个非常简单的遗嘱配置： 90% 标普500指数基金 10% 美国短期国债 这句话经常被引用，但很少被真正理解。 真正值得思考的不是： 为什么标普好？ 而是： 为什么一个一生都在主动投资的人，最终却给后代留下一个极度被动、甚至有些&quot;无聊&quot;的方案？ 如果主动投资真的长期更优，为什么不把家人的未来交给主动策略？ 如果市场可以持续被战胜，为什么不配置顶级基金经理？ 这个悖论背后，其实指向一个更本质的问题：…</p>]]></content>
   </entry>
   <entry>
     <title>Compound Interest Only Belongs to Survivors</title>
@@ -135,20 +135,20 @@
     <content type="html"><![CDATA[<p>生产系统首先是生存系统 从第一性原理出发，我们一直在说&quot;生产环境，生产环境&quot;——本质是什么？ 演示系统优化成功。生产系统优化生存。 这是完全不同的物种。 玩具系统旨在运行。生产系统旨在生存。 当系统的长期故障对组织来说变得不可接受时——当停机不再是战略上可容忍的，而是成为存在性威胁时——它就不再仅仅是服务系统，而成为生存系统。在那一刻，一切都改变了。 生产系统的第一目标不是服务用户。它是避免自我毁灭。…</p>]]></content>
   </entry>
   <entry>
-    <title>监控系统会死在哪里：构建真正有效的生产控制系统</title>
-    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/"/>
-    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/</id>
-    <updated>2026-02-12T07:19:56.588Z</updated>
-    <published>2026-02-11T09:01:31.000Z</published>
-    <content type="html"><![CDATA[<p>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。Memory 正常。Error rate 接近 0。 系统看上去一切健康。 02:25。更多客户报告超时。业务负责人进入会议：…</p>]]></content>
-  </entry>
-  <entry>
     <title>Where Monitoring Systems Die: Building Truly Effective Production Control Systems</title>
     <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_en/"/>
     <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_en/</id>
     <updated>2026-02-12T07:19:56.590Z</updated>
     <published>2026-02-11T09:01:31.000Z</published>
     <content type="html"><![CDATA[<p>When dashboards are all green but users are already down, you’re not facing an observability problem. You’re facing a control system failure. This is not a monitoring primer. This is a design review: why production organizations lose visibility when they need it most. Part 0:…</p>]]></content>
+  </entry>
+  <entry>
+    <title>监控系统会死在哪里：构建真正有效的生产控制系统</title>
+    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/"/>
+    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_production-monitoring_zh/</id>
+    <updated>2026-02-12T07:19:56.588Z</updated>
+    <published>2026-02-11T09:01:31.000Z</published>
+    <content type="html"><![CDATA[<p>当仪表盘一片绿色但用户已经宕机，你遇到的不是可观测性问题。你遇到的是控制系统故障。 这不是一份监控入门指南。这是一份设计审查：为什么生产组织在最需要可见性的时候会失去它。 Part 0: 改变一切的事故 场景 凌晨 02:17。 客户支持群开始出现第一条消息：某大客户请求大量超时。 02:19。Oncall 被拉醒。 02:21。Grafana dashboard 打开，一片绿色。 CPU 正常。Memory 正常。Error rate 接近 0。 系统看上去一切健康。 02:25。更多客户报告超时。业务负责人进入会议：…</p>]]></content>
   </entry>
   <entry>
     <title>In the AI Era, Writing Is No Longer Expression, But Modeling</title>
