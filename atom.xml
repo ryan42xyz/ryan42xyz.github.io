@@ -3,9 +3,17 @@
   <title>Rui Shao&apos;s Blog</title>
   <link href="https://ryan42xyz.github.io/atom.xml" rel="self"/>
   <link href="https://ryan42xyz.github.io/"/>
-  <updated>2026-02-12T09:47:06.789Z</updated>
+  <updated>2026-02-15T15:20:53.693Z</updated>
   <id>https://ryan42xyz.github.io/</id>
   <author><name>Rui Shao</name></author>
+  <entry>
+    <title>不是不够努力，而是站错位置：短线市场的结构性劣势</title>
+    <link href="https://ryan42xyz.github.io/2026/02/15/2026-02-15_short-term-structural-disadvantage/"/>
+    <id>https://ryan42xyz.github.io/2026/02/15/2026-02-15_short-term-structural-disadvantage/</id>
+    <updated>2026-02-15T15:20:53.693Z</updated>
+    <published>2026-02-15T08:46:00.000Z</published>
+    <content type="html"><![CDATA[<p>副标题： 当优势不可验证时，频繁决策只会让结果回归概率 引子：误解的起点 大多数投资者以为自己在判断公司未来，实际上是在预测别人会不会买。 当你进入市场时，你以为自己在做价值分析，在评估企业的长期前景，在寻找被低估的资产。在短线交易中，你真正在做的是：猜测其他参与者下一步会不会买入或卖出。 如果这是一个充分竞争、信息高度敏感的市场，普通人凭什么在短线中长期获利？ 大多数人不能。不是因为不够努力，不是因为技巧不足，而是因为站错了位置。 这不是技巧问题，而是结构位置问题。 Part 1: 市场是什么——充分竞争 + 信息敏感 市场不是价值发现，是预期博弈。…</p>]]></content>
+  </entry>
   <entry>
     <title>你正在优化的函数</title>
     <link href="https://ryan42xyz.github.io/2026/02/12/2026-02-12_objective-function-thinking_zh/"/>
@@ -159,15 +167,5 @@
     <content type="html"><![CDATA[<h2 id="问题：AI-能写博客，为什么还要自己写？">问题：AI 能写博客，为什么还要自己写？</h2>
 <p>AI 能写得很好。给它一个主题，它能生成结构清晰、逻辑顺畅、甚至文采不错的文章。那为什么还要自己写？</p>
 <p>答案取决于你的目标函数。</p>]]></content>
-  </entry>
-  <entry>
-    <title>In the AI Era, Writing Is No Longer Expression, But Modeling</title>
-    <link href="https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/"/>
-    <id>https://ryan42xyz.github.io/2026/02/11/2026-02-11_ai-writing-modeling_en/</id>
-    <updated>2026-02-12T07:19:56.588Z</updated>
-    <published>2026-02-11T08:22:42.000Z</published>
-    <content type="html"><![CDATA[<h2 id="Question-If-AI-Can-Write-Blogs-Why-Write-Yourself">Question: If AI Can Write Blogs, Why Write Yourself?</h2>
-<p>AI can write well. Give it a topic, and it can generate articles with clear structure, smooth logic, and even good prose. So why write yourself?</p>
-<p>The answer depends on your objective function.</p>]]></content>
   </entry>
 </feed>
